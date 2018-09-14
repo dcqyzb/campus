@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数据模式-图书测算</title>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="../../plugins/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css" href="../../css/common_datamode.css">
+<link rel="stylesheet" type="text/css" href="../../css/loading.css">
+<link rel="stylesheet" type="text/css" href="../../css/mylayui.css">
+</head>
+<body>
+	<!-- 左边导航 -->
+	<div class="left_nav">
+		<ul class="nav_ul">
+			<li class="selected">
+				<img src="../../image/datamode/nav_selected.png">
+				<a>读者借阅分析</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>图书借阅分析</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>图书需求趋势</a>
+			</li>
+		</ul>
+	</div>
+
+	<!-- 右边表格 -->
+	<div class="center_table">
+		<img width="100%" height="95%" src="../../image/datamode/tableborder.png">
+		
+		<!-- 读者借阅分析表 -->
+		<div id="table1">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>姓名：</span>
+					<input type="text" placeholder="请输入" style="width:70px;">
+				</div>
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>学年：</span>
+					<input type="text" class="input_year start" placeholder="yyyy" style="width:60px;">
+					至
+					<input type="text" class="input_year end" placeholder="yyyy" style="width:60px;">
+				</div>
+				<div class="search_btn" onclick="pagi_readerBorrow()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 懒惰样式-->
+				<div class="operate posi_btn" onclick="lazy_readerBorrow()">
+					<img src="../../image/datamode/lazy_reader.png">
+					<span>懒惰</span>
+				</div>
+				<!-- 一般样式-->
+				<div class="operate nega_btn" onclick="normal_readerBorrow()">
+					<img src="../../image/datamode/normal_reader.png">
+					<span>一般</span>
+				</div>
+				<!-- 活跃样式-->
+				<div class="operate nega_btn" onclick="active_readerBorrow()" style="left: 210px;">
+					<img src="../../image/datamode/active_reader.png">
+					<span>活跃</span>
+				</div>
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_readerBorrow()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="15%">学号</th>
+								<th width="10%">姓名</th>
+								<th width="5%">性别</th>
+								<th width="10%">学院</th>
+								<th width="10%">班级</th>
+								<th width="5%">年级</th>
+								<th width="10%">类型</th>
+								<th width="10%">总借阅量</th>
+								<th width="10%">总借书次数</th>
+								<th width="10%">学年</th>
+								<th width="5%">楼栋</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 图书借阅分析表 -->
+		<div id="table2" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>书名：</span>
+					<input type="text" placeholder="请输入" style="width:110px;">
+				</div>
+				<div class="search_condition">
+					<span>分类：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:103px;right:26px;">
+						<li class="selected">全部</li>
+						<li>马、列、毛</li>
+						<li>哲学宗教</li>
+						<li>社科总论</li>
+						<li>政治法律</li>
+						<li>军事</li>
+						<li>经济</li>
+						<li>文教体育</li>
+						<li>语言文字</li>
+						<li>文学</li>
+						<li>艺术</li>
+						<li>历史地理</li>
+						<li>自然科学总论</li>
+						<li>数理化学</li>
+						<li>天文地球</li>
+						<li>生物科学</li>
+						<li>医药卫生</li>
+						<li>农业科学</li>
+						<li>工业技术</li>
+						<li>航空、航天</li>
+						<li>交通运输</li>
+						<li>环境科学</li>
+						<li>综合类</li>
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>学年：</span>
+					<input type="text" class="input_year start" placeholder="yyyy" style="width:60px;">
+					至
+					<input type="text" class="input_year end" placeholder="yyyy" style="width:60px;">
+				</div>
+				<div class="search_btn" onclick="pagi_bookBorrow()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 冷门样式-->
+				<div class="operate posi_btn" onclick="upset_bookBorrow()">
+					<img src="../../image/datamode/upset_book.png">
+					<span>冷门</span>
+				</div>
+				<!-- 一般样式-->
+				<div class="operate nega_btn" onclick="normal_bookBorrow()">
+					<img src="../../image/datamode/normal_book.png">
+					<span>一般</span>
+				</div>
+				<!-- 热门样式-->
+				<div class="operate nega_btn" onclick="hot_bookBorrow()" style="left: 210px;">
+					<img src="../../image/datamode/hot_book.png">
+					<span>热门</span>
+				</div>				
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_bookBorrow()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="10%">书名</th>
+								<th width="10%">分类</th>
+								<th width="5%">热度</th>
+								<th width="10%">学年</th>
+								<th width="5%" title="借阅次数">借阅次数</th>
+								<th width="10%">作者</th>
+								<th width="10%">出版社</th>
+								<th width="5%">版次</th>
+								<th width="5%" title="出版时间">出版时间</th>				
+								<th width="5%" title="采购年份">采购年份</th>
+								<th width="10%">摆放位置</th>
+								<th width="5%" title="破损程度">破损程度</th>
+								<th width="10%">借阅关系</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 图书需求趋势表 -->
+		<div id="table3" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span style="font-size: 16px;">书类名：</span>
+					<input type="text" placeholder="请输入" style="width: 110px; font-size: 14px;">
+				</div>
+				<div class="search_condition">
+					<span>分类：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:103px;right:26px;">
+						<li class="selected">全部</li>
+						<li>马、列、毛</li>
+						<li>哲学宗教</li>
+						<li>社科总论</li>
+						<li>政治法律</li>
+						<li>军事</li>
+						<li>经济</li>
+						<li>文教体育</li>
+						<li>语言文字</li>
+						<li>文学</li>
+						<li>艺术</li>
+						<li>历史地理</li>
+						<li>自然科学总论</li>
+						<li>数理化学</li>
+						<li>天文地球</li>
+						<li>生物科学</li>
+						<li>医药卫生</li>
+						<li>农业科学</li>
+						<li>工业技术</li>
+						<li>航空、航天</li>
+						<li>交通运输</li>
+						<li>环境科学</li>
+						<li>综合类</li>
+					</ul>
+				</div>
+				<div class="search_btn" onclick="pagi_bookRequire()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_bookRequire()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="10%">序号</th>
+								<th width="20%">书类名</th>
+								<th width="15%">分类</th>
+								<th width="15%">已有复本数</th>
+								<th width="15%">预测复本数</th>
+								<th width="15%">需求量</th>
+								<th width="10%">热度</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+						
+		<div class="foot_area">
+			<div class="pageText" id="pageText">共  <span class="num">1</span> 页，<span class="num">2</span> 条，
+				当前第 <span class="num">1 - 2 </span>条</div>
+			<div class="pageBtn" id="pagination"></div>
+		</div>
+	</div>
+
+	<!-- 右边排行与通告 -->
+	<div class="right">
+		<!-- 排行榜 -->
+		<div class="rank">
+			<div class="title">
+				<span>排行榜</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			
+			<!-- 读者借阅分析TOP10-->
+			<div class="table_all" id="top10_1">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="15%">序号</th>
+								<th width="40%">姓名</th>
+								<th width="45%">借阅量</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 图书借阅分析TOP10-->
+			<div class="table_all" id="top10_2" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="50%">书名</th>
+								<th width="30%">借阅次数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 图书需求趋势TOP10-->
+			<div class="table_all" id="top10_3" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="50%">书类名</th>
+								<th width="30%">需求量</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+		
+		<!-- 通知通告 -->
+		<div class="notice">
+			<div class="title">
+				<span>通知通告</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div class="table_all" id="notice">
+				<ul>
+				</ul>				
+			</div>
+		</div>
+	</div>
+	
+	<div class="loading" style="display:none;position:absolute;left:42%;top:40%;"></div>
+</body>
+
+<script src="../../plugins/jquery.min.js"></script>
+<script>
+(function(){
+	var $parentIframe = $(window.parent.document.getElementById("contentFrame"));
+	$("body").css("height", $parentIframe.height());
+	
+	var screenWidth = window.screen.width;
+	if( screenWidth < 1900){
+		$(".table_area").css("height", $(".center_table>img").height() - 150);
+		$(".table_all").map(function(){
+			$(this).css("height", $(this).parent().height() - 50);
+		});
+		$(".table_content").map(function(){
+			$(this).css("height", $(this).parent().height() - 50);
+		});
+		
+		$(".nav_ul a").css("font-size", (screenWidth/277 + 10) + "px");
+		$(".search_condition span").css("font-size", "16px");
+		$(".search_condition input").css("font-size", "14px");
+		$(".table_head thead").css("font-size", "16px");
+		$(".table_content tbody").css("font-size", "14px");
+		$(".right .title").css("font-size", "16px");
+	}
+})();
+</script>
+<script src="../../plugins/layui/layui.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script src="../../js/datamode/bookCalculate_data.js"></script>
+<script src="../../plugins/JsonExportExcel.min.js"></script>
+<script src="../../plugins/echarts4/echarts.min.js"></script>
+<script src="../../plugins/echarts4/echarts-wordcloud.js"></script>
+</html>

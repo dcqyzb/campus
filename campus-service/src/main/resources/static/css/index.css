@@ -1,0 +1,256 @@
+/*
+ * 首页样式
+ * liy
+ */
+ 
+body { width: 100%; min-width: 1366px; min-height: 768px;}
+
+/* 背景图 */
+img.background { position: absolute; top: 0; left: 0; z-index: 0; min-width: 1366px;}
+
+.top {
+	position: relative;	
+	width: 100%;
+	height: 11%;
+}
+
+/* 线图 */
+img.line { position: absolute; z-index: 9; min-width: 1366px; }
+/* 文字logo图 */
+img.logo { position: absolute; width: 16%; top: 12%; left: 2.5%; }
+
+/* 导航条 */
+.nav {
+	position: relative;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+/* 导航条图片 */
+.nav img{
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: auto;
+	z-index: 99;
+}
+/* 导航条选中显示文字在中间 */
+.nav_span {	
+	z-index: 99;	
+	font-size: 26px;
+	font-family: 'hanyi';
+	text-align: center;
+	text-decoration: none; 	
+	position: absolute;
+	width: 108px;
+	left: 18px;
+	right: 0;
+	top: 10px;
+	margin: auto;	
+	cursor: pointer;
+}
+.nav_choose {
+	height: 100%;
+}
+/* 导航条普通显示图片 */
+img.nav_choose_bg { height: 85px; top: 0; }
+img.left_icon { height: 15px; top: 15px; left: -18%; cursor: pointer;}
+img.right_icon { height: 15px; top: 15px; left: 20%; cursor: pointer;}
+img.down_icon { top: 75%; left: 15px; cursor: pointer; }
+/* 导航条普通显示文字 */
+.nav_choose_span {
+	width: 108px;
+	color: #ddf6fe;
+	font-size: 26px;
+	border-bottom: 3px solid #f5900e;
+	top: 15%;
+}
+
+/* 导航条展开 */
+.nav_expand {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+}
+img.nav_expand_bg { left: 2%; }
+img.up_icon { top: 35%; left: 1%; cursor: pointer; }
+/* 导航条展开中间文字 */
+.nav_expand_span_center {
+	width: 12%;
+	color: #ffffff;
+	font-size: 32px;
+	text-shadow: 0px 0px 5px #23d8ea;
+	left: 1%;
+	top: 5%;
+}
+.nav_tabs { height: 100%; }
+/* 导航条展开圆上文字 */
+.nav_expand_span_circle {
+	width: 8%;
+	color: #ffffff;
+	font-size: 18px;
+	z-index: 999;
+}
+.nav_tabs span.first {
+	left: -19%;
+	top: 9%;
+	-ms-transform: rotate(55deg); /* IE 9 */
+    -mozs-transform: rotate(55deg); /* Firefox */
+    -webkit-transform: rotate(55deg); /* Safari and Chrome */
+    -o-transform: rotate(55deg); /* Opera */
+    transform: rotate(55deg);
+}
+.nav_tabs span.second {
+	left: -12%;
+	top: 19%;
+	-ms-transform: rotate(33deg); /* IE 9 */
+    -mozs-transform: rotate(33deg); /* Firefox */
+    -webkit-transform: rotate(33deg); /* Safari and Chrome */
+    -o-transform: rotate(33deg); /* Opera */
+    transform: rotate(33deg);
+}
+.nav_tabs span.third {
+	left: -3.5%;
+	top: 24.5%;
+	-ms-transform: rotate(11deg); /* IE 9 */
+    -mozs-transform: rotate(11deg); /* Firefox */
+    -webkit-transform: rotate(11deg); /* Safari and Chrome */
+    -o-transform: rotate(11deg); /* Opera */
+    transform: rotate(11deg);
+}
+.nav_tabs span.fourth {
+	left: 5.5%;
+	top: 24.5%;
+	-ms-transform: rotate(-12deg); /* IE 9 */
+    -mozs-transform: rotate(-12deg); /* Firefox */
+    -webkit-transform: rotate(-12deg); /* Safari and Chrome */
+    -o-transform: rotate(-12deg); /* Opera */
+    transform: rotate(-12deg);
+}
+.nav_tabs span.fifth {
+	left: 14%;
+	top: 19%;
+	-ms-transform: rotate(-35deg); /* IE 9 */
+    -mozs-transform: rotate(-35deg); /* Firefox */
+    -webkit-transform: rotate(-35deg); /* Safari and Chrome */
+    -o-transform: rotate(-35deg); /* Opera */
+    transform: rotate(-35deg);
+}
+.nav_tabs span.sixth {
+	left: 21%;
+	top: 9%;
+	-ms-transform: rotate(-55deg); /* IE 9 */
+    -mozs-transform: rotate(-55deg); /* Firefox */
+    -webkit-transform: rotate(-55deg); /* Safari and Chrome */
+    -o-transform: rotate(-55deg); /* Opera */
+    transform: rotate(-55deg);
+}
+.nav_tabs span.selected,  .nav_tabs span:hover {
+	color: #41f1fc;
+}
+.nav_tabs img {z-index: 99; position: absolute; width: 6.5%;}
+
+/* 模式切换 */
+.mode {
+	position: absolute;
+	left: 28%;
+	top: 35%;
+	font-family: 'microsoft yahei';
+	font-size: 16px;
+	color: white;
+	z-index: 99;
+	text-shadow: 0 0 3px white;
+}
+.mode span:hover {cursor: pointer;}
+.mode span.selected {
+	cursor: pointer;
+	font-size: 20px;
+	color: #4be8fa;
+	text-decoration: underline;
+	text-shadow: 0 0 3px #4be8fa;
+}
+
+/* 学院选择 */
+.academy {
+	position: absolute;
+	left: 28%;
+	top: 35%;
+	font-family: 'microsoft yahei';
+	font-size: 20px;
+	color: white;
+	z-index: 99;
+}
+.academy>div.academy_btn {
+	font-size: 12px;
+	color: #5ec5fb;
+	display: inline;
+	cursor: pointer;
+}
+.academy ul {
+	width: 80px;
+	max-height: 120px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: absolute;
+	right: -20px;
+	border: solid 1px #867c7c;
+	color: #5ec5fb;
+	display: none;
+	z-index: 999;
+	background-color: #0b2b35;
+}
+.academy ul li {
+	width: 100%; 
+	padding-left: 5px; 
+	cursor: pointer; 
+	overflow: hidden;
+}
+.academy ul li:hover, .academy ul li.selected {background-color: #036894;}
+/* 滚动条样式 */
+.academy ul::-webkit-scrollbar {width: 3px; background-color: #083c75;}
+.academy ul::-webkit-scrollbar-thumb {background-color: #165fac;}
+
+/* 登录信息 */
+.loginInfo {
+	position: absolute;
+	top: 35%;
+	right: 1.5%;
+	font-size: 15px;
+	color: #7aeff6;
+	z-index: 99;
+}
+.loginInfo>div {display: inline-block; height: 20px; margin-right: 10px; cursor: pointer;}
+.loginInfo span#logout {text-decoration: underline; margin-right: -5px;}
+
+/* 天气 */
+.weather {
+	position: absolute;
+	left: 62%;
+	top: 35%;
+	color: white;
+	font-family: 'microsoft yahei';
+	font-size: 20px;
+	z-index: 99;
+}
+.weather span {margin-right: 15px;}
+
+/* 中间件 */
+.center {
+	position: relative;
+	width: 100%;
+	height: 89%;
+	z-index: 9;
+}
+.center img {width: 96%; position: absolute; left:0; right:0; margin:auto; }
+
+iframe {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 2%;
+	margin: auto;
+	border: none;
+}
+

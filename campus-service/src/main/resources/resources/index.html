@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="plugins/scrollbar/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/mylayui.css">
+<link rel="stylesheet" type="text/css" href="css/lay/fundingDetail.css">
+<link rel="stylesheet" type="text/css" href="css/lay/electricDetail.css">
+<title>校园应用大数据平台</title>
+</head>
+<body>
+<img class="background" src="image/background.png">
+<div class="top">
+	<img class="line" src="image/headline.png">
+	<img class="logo" src="image/logo.png">
+	
+	<div class="nav">
+		<!-- 导航普通显示 -->
+		<div class="nav_choose">
+			<img class="nav_choose_bg" src="image/nav/nav.png">
+			<img class="left_icon" src="image/nav/left_icon.png"
+				onclick="changeNav(-1)">
+			<img class="right_icon" src="image/nav/right_icon.png"
+				onclick="changeNav(1)">
+			<img class="down_icon" src="image/nav/down.png"
+				onclick="showNav()">
+			<span class="nav_span nav_choose_span"
+				onclick="showNav()">精准资助</span>
+		</div>
+		<!-- 导航展开 -->
+		<div class="nav_expand" style="display: none;">
+			<img class="nav_expand_bg" src="image/nav/nav_expand.png">
+			<img class="up_icon" src="image/nav/up.png"
+				onclick="hideNav()">
+			<span class="nav_span nav_expand_span_center" 
+				onclick="hideNav()">精准资助</span>
+			
+			<div class="nav_tabs">
+				<div>
+					<span data-href="page/preciseFunding.html" class="nav_span nav_expand_span_circle first selected">精准资助</span>
+					<img src="image/nav/nav_expand_span1.png" style="left:-19%;top:2.3%;">
+				</div>
+				<div>
+					<span data-href="page/lossWarn.html" class="nav_span nav_expand_span_circle second">失联预警</span>
+					<img src="image/nav/nav_expand_span2.png" style="display:none;left:-12.5%;top:11%;">
+				</div>
+				<div>
+					<span data-href="page/electricalBehavior.html" class="nav_span nav_expand_span_circle third">用电行为</span>
+					<img src="image/nav/nav_expand_span3.png" style="display:none;left:-3.8%;top:15.8%;">
+				</div>
+				<div>
+					<span data-href="page/bookCalculate.html" class="nav_span nav_expand_span_circle fourth">图书测算</span>
+					<img src="image/nav/nav_expand_span4.png" style="display:none;left:6.3%;top:15.5%;">
+				</div>
+				<div>
+					<span data-href="page/netBehavior.html" class="nav_span nav_expand_span_circle fifth">网络行为</span>
+					<img src="image/nav/nav_expand_span5.png" style="display:none;left:14.5%;top:10.8%;">
+				</div>
+				<div>
+					<span data-href="page/enrollDecision.html" class="nav_span nav_expand_span_circle sixth">招生决策</span>
+					<img src="image/nav/nav_expand_span6.png" style="display:none;left:20.8%;top:1.2%;">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 学院切换 -->
+	<!-- <div class="academy">
+		<span id="academy_selected">全校</span>
+		<div class="academy_btn" onclick="selectAcademy()">
+			<img src="image/qiehuan.png" width="10">
+			<span>切换学院</span>
+		</div>
+		<div class="academy_list" style="width:80px;">
+			<ul></ul>
+		</div>
+	</div> -->
+	
+	<div class="mode">
+		<span class="mode_chart selected">图表模式</span>
+		/
+		<span class="mode_data">数据模式</span>
+	</div>
+	
+	<!-- 登录信息 -->
+	<div class="loginInfo">
+		<div>
+			<span style="cursor:default;">欢迎您,</span>
+			<span id="username">admin</span>
+			<img src="image/xiala.png" width="12" style="vertical-align:0;">
+		</div>
+		<div>
+			<span id="logout">退出</span>
+			<img src="image/tuichu.png" width="18" style="vertical-align:-4px;">
+		</div>
+	</div>
+	
+	<!-- 天气信息 -->
+	<div class="weather">
+		<img src="image/duoyun.png" width="28" style="vertical-align:-8px;">
+		<span>多云</span>
+		<span>11℃~23℃</span>
+		<span style="color:#d1ac2d;">轻度污染</span>
+		<!-- <iframe width="420" scrolling="no" height="60" frameborder="0" 
+			allowtransparency="true" 
+			src="http://i.tianqi.com/index.php?c=code&id=12&icon=1&num=5&site=12">
+		</iframe> -->
+	</div>
+</div>
+
+<!-- 中间部分 -->
+<div class="center">
+	<img src="image/border.png">
+	<iframe id="contentFrame" width="90%" height="94%" 
+		src="" scrolling="no">
+	</iframe>
+</div>
+
+<script src="plugins/jquery.min.js"></script>
+<script type="text/javascript">
+(function(){
+	var screenWidth = window.screen.width, 
+		screenHeight = window.screen.height;
+	/**
+	 * 初始化页面渲染样式修改
+	 */
+	$("body").css({
+		"width": screenWidth+"px",
+		"height": screenHeight+"px",
+		"min-height": screenWidth/(1920/1080)+"px",
+		"max-height": screenWidth/(1920/1080)+"px",
+	});
+	//背景图
+	$(".background").css("width", screenWidth+"px");
+	//$("img.background").css("height", window.screen.height+"px");
+	//头部线图
+	$(".line").css("width", screenWidth+"px");
+	//导航栏
+	var w = (screenWidth > 1366) ? screenWidth : 1366;
+	$(".nav").css("height", (w/(1920/101)+10)+"px");
+	$(".nav_choose_bg").css("height", (w/(1920/101)+15)+"px");	
+	$(".nav_expand").css("height", w/(1537/637)*0.8+"px");
+	$(".nav_expand_bg").css("width", w*0.8+"px");
+	
+	//根据屏幕分辨率大小设置样式
+	if(screenWidth < 1700){
+		$(".nav_tabs span").css("font-size", "14px");	//展开导航圆上文字大小
+		$(".academy").css("top", "30%");	//学院选择
+		$(".weather").css({"top": "30%", "font-size": "16px"});	//天气
+		$(".loginInfo").css({"top": "22%", "font-size": "13px", "right":"0"});	//个人
+	}
+	
+	/* $(window).on("load", function(){
+		var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+	    if((userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1) //判断是否IE<11浏览器  
+	    		|| (userAgent.indexOf("Edge") > -1) 	//判断是否IE的Edge浏览器  
+	    		|| (userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1)){
+	    	$(".academy_list").mCustomScrollbar();
+	    }
+	}); */
+})();
+</script>
+<script src="plugins/jquery.arctext.js"></script>	<!-- 字弯曲插件 -->
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script src="plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="plugins/layui/layui.js"></script>
+</body>
+</html>

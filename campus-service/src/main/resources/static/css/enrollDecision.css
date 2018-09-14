@@ -1,0 +1,43 @@
+/*
+ * 精招生决策css
+ */
+
+/* 地图块的列表 */
+.map_list {
+	width: 18%;
+	height: 49%;
+	font-size: 14px;
+	position: absolute;
+	top: 38%;
+	right: 0;
+	color: #61c7f6;
+}
+.map_list ul {
+	width: 100%;
+	height: 95%;
+	overflow: auto;
+	/* box-shadow: 0 0px 35px 0px #07315b inset; */
+}
+.map_list ul li {cursor: pointer;}
+.map_list ul li span:first-child {width:54%; float: left;}
+.map_list ul li span:last-child {width:44%; float: right; text-align: left; display: block; white-space:nowrap; overflow: hidden;}
+.map_list ul li:hover, .map_list ul li.hover {
+	background: url(../image/list_checked.png) no-repeat;
+	background-size: cover;
+}
+.map_list ul::-webkit-scrollbar {display: none;}
+
+/* 重点生源地 */
+.map_list li div{
+	width:8px;
+	height:8px;
+	margin-right:2%;
+	display:inline-block;
+}
+.isTop{
+    background: #f07321;
+    display: inline-block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}

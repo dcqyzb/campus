@@ -1,0 +1,240 @@
+/*
+ * 页面公共样式
+ */
+
+* { margin: 0; padding: 0;}
+
+/* 引入新的字体 */
+@font-face {
+	font-family: 'hanyi';	/* 字体名 */
+	src: url('./fonts/hanyi.ttf');
+}
+
+/* body {width:100%; height: 100%;} */
+
+iframe {
+	border: none;
+}
+
+ul {list-style: none;}
+li {height: 21px; font-size: 14px; line-height: 21px;}
+/* 滚动条样式 */
+ul::-webkit-scrollbar, div::-webkit-scrollbar {
+	width: 3px; 
+	background-color: #083c75;
+}
+ul::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb {
+	background-color: #165fac;
+}
+iframe::-webkit-scrollbar {
+	width: 8px; 
+	background-color: #083c75;
+}
+iframe::-webkit-scrollbar-thumb {
+	background-color: #165fac;
+}
+/* 使用插件的的滚动条样式 */
+.mCS-my-theme1.mCSB_scrollTools {width: 0!important;}
+.mCS-my-theme1 > .mCSB_container {margin: 0!important;}
+
+.mCS-my-theme2.mCSB_scrollTools {width: 8px;}
+.mCS-my-theme2 > .mCSB_container {margin: 0!important;}
+.mCS-my-theme2 .mCSB_dragger .mCSB_dragger_bar{ 
+	width: 8px!important; 
+	background-color: #165fac!important; 
+	margin: 0!important;
+	padding: 0!important;;
+	border-radius: 0!important;
+}
+.mCS-my-theme2 .mCSB_draggerRail {
+	width: 8px!important; 
+	background-color: #083c75!important; 
+	margin: 0!important;
+	padding: 0!important;
+	border-radius: 0!important;
+}
+
+/* 横向线 */
+hr.horizontal {
+	width: 100%;
+	height: 2px;
+	border: none;
+	background: linear-gradient(right, #0c284f, #1451ac, #0c284f);
+	background: -webkit-gradient(linear, right, #0c284f, #1451ac, #0c284f);
+	background: -webkit-linear-gradient(right, #0c284f, #1451ac, #0c284f);
+	background: -o-linear-gradient(right, #0c284f, #1451ac, #0c284f);
+	background: -moz-linear-gradient(right, #0c284f, #1451ac, #0c284f);
+	background: -ms-linear-gradient(right, #0c284f, #1451ac, #0c284f);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0c284f', endColorstr='#0c284f',GradientType=1 );
+}
+/* 竖直线 */
+hr.vertical {
+	width: 2px;
+	height: 85%;
+	margin-top: 2%;
+	border: none;
+	float: left;
+	background: linear-gradient(bottom, #0c284f, #1451ac, #0c284f);
+	background: -webkit-gradient(linear, bottom, #0c284f, #1451ac, #0c284f);
+	background: -webkit-linear-gradient(bottom, #0c284f, #1451ac, #0c284f);
+	background: -o-linear-gradient(bottom, #0c284f, #1451ac, #0c284f);
+	background: -moz-linear-gradient(bottom, #0c284f, #1451ac, #0c284f);
+	background: -ms-linear-gradient(bottom, #0c284f, #1451ac, #0c284f);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0c284f', endColorstr='#0c284f',GradientType=0 );
+}
+
+/* 上下两层结构层次div */
+.level_a {width: 100%; height: 50%}
+/* 左右结构div样式 */
+.level_b {height: 100%; float: left;}
+.level_b>div {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.level_c {width: 100%; margin-bottom: 20px;position:relative;}
+
+/* 每个图的标题 */
+.title {
+	color: white; 
+	font-size: 18px;
+	position: relative;
+	margin-top: 10px;
+}
+/* 标题文字 */
+.title span {
+	padding-left: 5px;
+	border-bottom: 2px solid #5dc7fb; 
+	padding-right:5px;
+	text-shadow:0px 0px 5px #5dc7fb;
+	cursor: pointer;
+}
+/* 标题左边竖线 */
+.title_left_hr {
+	border: none;
+	width: 1px;
+	height: 70%;
+	position: absolute;
+	left: 0;
+	top: 15%;
+	background-color: #feb113;
+}
+/* 标题右边小图样式 */
+.title_right_hr {
+	width: 2px;
+	height: 13px;
+	border: none;
+	display: inline-block;
+	background-color: #5dc5fc;
+	margin-left: -3px;
+	margin-bottom: -8px;
+	-ms-transform: rotate(35deg); /* IE 9 */
+    -mozs-transform: rotate(35deg); /* Firefox */
+    -webkit-transform: rotate(35deg); /* Safari and Chrome */
+    -o-transform: rotate(35deg); /* Opera */
+    transform: rotate(35deg);
+}
+.title_point {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background-color: #5dc5fc;
+	display: inline-block;
+	margin-left: -7px;
+}
+
+/* 表格 */
+table {
+	width: 100%;
+	height: 100%;
+	color: #54b3e3;
+	/* border: 1px solid #0a4472; */
+	border-spacing: 0;
+	white-space: nowrap;
+	font-size: 15px;
+	table-layout: fixed;
+}
+thead {background-color: #084572;}
+tbody {font-size: 14px;}
+tr {height: 30px;}
+th, td {
+	border: none; 
+	text-align: center; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* 表格分块，表头和表内容分为两个div，内容超出滚动条 */
+div.table_all {
+	border: 1px solid #0a4472;
+	margin-top: 5%;
+	width: 95%;
+}
+div.table_head {width: 100%;}
+div.table_content {width: 100%;height: 87%;overflow: auto;}
+div.table_content tr:nth-child(even) {background-color: #0a3b66;}
+div.table_content::-webkit-scrollbar {width: 8px;}
+
+/* 提示框 */
+.tip {
+	border-radius: 0; 
+	border-width: 1px; 
+	border-color: gold;
+	box-shadow: 0 0 5px 1px gold inset;
+	background-color: rgba(108, 101, 59, 0.8);
+}
+.tip hr {
+    border: none;
+    background-color: gold;
+    position: absolute;
+}
+/* .tip hr.rotate {
+    width: 100px;
+    height: 1px;
+    position: absolute;
+    left: -87px;
+    top: 62px;
+    -ms-transform: rotate(-70deg); IE 9
+    -moz-transform: rotate(-70deg); Firefox
+    -webkit-transform: rotate(-70deg); Safari and Chrome
+    -o-transform: rotate(-70deg); Opera
+    transform: rotate(-70deg);
+} */
+
+/* 时间轴 */
+.time {
+	position: absolute;
+    bottom: 10%;
+    width: 45px;;
+    left: 5%;
+    /* right: 0;
+    margin: auto; */
+}
+.time_year{
+	position: absolute;
+    bottom: 0;
+    width: 45px;
+    left: 10%;
+}
+.time_select {width: 45px;}
+.time_select ul {
+	width: 40px; 
+	border: 1px solid #4b9fcb;
+	border-radius: 3px;
+	background-color: #2a5683;
+}
+.time_select ul li {
+	height: 18px;
+	line-height: 18px;
+	color: #a4c2e6; 
+	text-align: center; 
+	border: 1px solid #4b9fcb;
+	cursor: pointer;
+}
+.time_select ul li.selected {
+	color: white;
+	background-color: #367cc4;
+}

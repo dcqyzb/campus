@@ -1,0 +1,66 @@
+spring:
+  profiles:
+#    active: @spring.active@
+    active: dev
+    
+campus:
+#是否开启swagger (true/false)
+  swagger-open: true
+
+rest:
+  auth-open: true #jwt鉴权机制是否开启(true或者false)
+  sign-open: true #签名机制是否开启(true或false)
+
+jwt:
+  header: Authorization   #http请求头所需要的字段
+  secret: mySecret        #jwt秘钥
+  expiration: 604800      #7天 单位:秒
+  auth-path: auth         #认证请求的路径
+  md5-key: randomKey      #md5加密混淆key
+
+mybatis-plus:
+  mapper-locations: classpath*:com/mit/campus/rest/**/mapping/*.xml
+  typeAliasesPackage: com.mit.campus.rest.common.persistence.model
+  global-config:
+    id-type: 0  #0:数据库ID自增   1:用户输入id  2:全局唯一id(IdWorker)  3:全局唯一ID(uuid)
+    db-column-underline: false
+    refresh-mapper: true
+  configuration:
+    map-underscore-to-camel-case: false
+    cache-enabled: true #配置的缓存的全局开关
+    lazyLoadingEnabled: true #延时加载的开关
+    multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
+
+logging:
+  level.root: info
+  level.com.mit: debug
+  path: logs/
+  file: campus-rest.log
+
+---
+  
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/guns_rest?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+    username: root
+    password: world
+    filters: log4j,wall,mergeStat
+    driver-class-name: com.mysql.jdbc.Driver
+server:
+  port: 8080 #项目端口
+
+---  
+    
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/campus?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    filters: log4j,wall,mergeStat
+    driver-class-name: com.mysql.jdbc.Driver  
+server:
+  port: 8087 #项目端口    
+    

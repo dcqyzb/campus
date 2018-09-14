@@ -1,0 +1,95 @@
+<!-- 本页面为失联预警-数据模式-失联地点统计的弹窗页面 -->
+<style>
+::-webkit-scrollbar {width: 8px; background-color: #083c75;}
+::-webkit-scrollbar-thumb {background-color: #165fac;}
+body{overflow: hidden;}
+.top_info {
+	width: 100%;
+	font-size: 16px;
+	color: white;
+	line-height: 40px;
+	/* border-bottom: 1px solid rgba(45, 149, 212, 0.5); */
+	position: fixed;
+	top: 0px;
+}
+.top_info>span{margin: 0 15px; text-shadow: 0 0 5px white;}
+.list {margin-top: 40px; position: relative; padding-left: 20px; height:92%;overflow:auto;}
+.list .line { width: 1px; height: 100%; background-color: #314a31; position: absolute; left: 27px; z-index: -1;margin-top:5px;}
+.list ul {margin:0;padding:0;}
+.list ul li {
+	margin: 0 25px;
+	font-size: 14px;
+	color: #a5fefb;
+	line-height: 30px;
+	list-style-image: url(../../../image/datamode/timelinepoint.png);
+	border-bottom: 1px solid rgba(45, 149, 212, 0.5);
+}
+.list ul li .main{color:#a5defb;font-size:16px;}
+.list ul li .detail{color:#61c7f6;font-size:14px;}
+
+.list  ul li:last-child {
+	margin-bottom: 0px;
+}
+</style>
+<div id="content">
+	<div class="top_info">
+		<span style="margin-left:30px;">失联地点：<span id="placeName"></span></span>
+		<span>年份：<span id="year"></span></span>
+		<span>事件总数：<span id="total"></span></span>
+		<span>失联总人数：<span id="totalPerson"></span>人</span>
+	</div>
+	<div class="list">
+		<div class="line"></div>
+		<ul>
+			<li>
+				<div class="main"></div>
+				<div class="detail"></div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript" src="../../../plugins/jquery.min.js"></script>
+<script type="text/javascript">
+function open_success(o){
+	$.ajax({
+		type: 'post',
+		url: '/lossContactWarn/getSiteLossIncident',
+		data: {
+			place : o.placeName,
+			yyyy : o.year
+		},
+		dataType: 'json',
+		success: function(result){
+			var data = result.object;
+			if(data){
+				$("#placeName").text(o.placeName);
+				$("#year").text(o.year);
+				
+				var $ul = $(".list ul");
+				var html = "", total = 0, totalPerson = 0;
+				$.each(data, function(i, item){
+					total += item.incTotal;
+					totalPerson += item.stuTotal;
+					html += "<li>" +
+								"<div class='main'>" +
+									"<span style='margin-right:20px;'>"+item.college+"</span><span>失联人数："+item.stuTotal+"人</span>" +
+								"</div>" +
+								"<div class='detail'>";
+					$.each(item.list, function(j, n){
+						var time = n.yyyyMM + "-" + n.timeslot.split("/")[1];
+						html += "<div><span style='margin-right:15px;'>"+time+"</span><span>"+n.names+"</span><div>";
+					});
+					html += "</div></li>";
+				});
+				$ul.html(html);
+				$ul.prev().css("height", $ul.height());
+				$("#total").text(total);
+				$("#totalPerson").text(totalPerson);
+			}else{
+				$("#content").html("数据不存在");
+			}
+		}
+	});
+}
+</script>

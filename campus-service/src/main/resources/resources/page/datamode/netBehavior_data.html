@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数据模式-网络行为</title>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="../../plugins/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css" href="../../css/common_datamode.css">
+<link rel="stylesheet" type="text/css" href="../../css/loading.css">
+<link rel="stylesheet" type="text/css" href="../../css/mylayui.css">
+</head>
+<body>
+	<!-- 左边导航 -->
+	<div class="left_nav">
+		<ul class="nav_ul">
+			<li class="selected">
+				<img src="../../image/datamode/nav_selected.png">
+				<a>网络设备检测</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>网络行为与成绩</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>沉迷网络原因</a>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- 右边表格 -->
+	<div class="center_table">
+		<img width="100%" height="95%" src="../../image/datamode/tableborder.png">
+		
+		<!-- 网络设备信息表 -->
+		<div id="table1">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition" style="top: 34px;">
+					<span>设备编号：</span>
+					<input type="text" style="width:90px;">
+					<ul style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition" style="top: 34px;">
+					<span>设备地点：</span>
+					<input type="text" style="width:82px;" >
+					<ul  style="width:143px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition" style="top: 34px;">
+					<span>检测时间：</span>
+					<input type="text" class="input_month start" placeholder="yyyy-MM" style="width:80px;">
+					至
+					<input type="text" class="input_month end" placeholder="yyyy-MM" style="width:80px;">
+				</div>
+				<div class="search_btn" onclick="pagi_deviceNumber()" style="left:-11px;">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)" style="left:-4px">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_deviceNumber()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="10%">设备编号</th>
+								<th width="10%">终端连接数</th>
+								<th width="7%">安装时间</th>
+								<th width="7%">年限</th>
+								<th width="10%">当前宽带</th>
+								<th width="10%">宽带使用率</th>
+								<th width="10%">宽带消耗</th>
+								<th width="11%">设备地点</th>
+								<th width="10%">设备负责人</th>
+								<th width="10%">检测时间</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 网络行为与成绩表 -->
+		<div id="table2" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition" >
+					<span>姓名：</span>
+					<input type="text" style="width:93px;">
+				</div>
+				<div class="search_condition" style="margin-left:21px; margin-right:10px">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition" >
+					<span>专业：</span>
+					<input type="text" style="width:130px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul major" style="width:143px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition" >
+					<span>统计时间：</span>
+					<input type="text" class="input_date start" placeholder="yyyy-MM-dd" style="width:90px;">
+					至
+					<input type="text" class="input_date end" placeholder="yyyy-MM-dd" style="width:90px;">
+				</div>
+				<div class="search_btn" onclick="pagi_stunetArea()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 单个按钮 -->
+				<div class="operate export_btn" onclick="export_stunetArea()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+							    <th width="14%">学号</th>
+								<th width="5%">姓名</th>
+								<th width="10%">学院</th>
+								<th width="10%">专业</th>
+								<th width="8%">上网时长</th>
+								<th width="8%">上网次数</th>
+								<th width="10%">上传总流量</th>
+								<th width="10%">下载总流量</th>
+								<th width="5%" title="上次考试平均成绩">上次考试平均成绩</th>
+								<th width="10%">统计时间</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+				<!-- 学生沉迷网络原因表 -->
+		<div id="table3" style="display:none;">
+			<!-- 搜索区域 -->
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition" >
+					<span>姓名：</span>
+					<input type="text" style="width:93px;">
+				</div>
+				<div class="search_condition" style="margin-left:21px; margin-right:10px">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition" >
+					<span>专业：</span>
+					<input type="text" style="width:130px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul major" style="width:143px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition" >
+					<span>统计时间：</span>
+					<input type="text" class="input_month start" placeholder="yyyy-MM" style="width:90px;">
+					至
+					<input type="text" class="input_month end" placeholder="yyyy-MM" style="width:90px;">
+				</div>
+				<div class="search_btn" onclick="pagi_stuNetKey()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 单个按钮 -->
+				<div class="operate export_btn" onclick="export_keyword()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+							    <th width="10%">学号</th>
+								<th width="10%">姓名</th>
+								<th width="10%">学院</th>
+								<th width="11%">专业</th>
+								<th width="14%">平均每天上网时长</th>
+								<th width="11%">沉迷网络原因</th>
+								<th width="15%">统计时间</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="foot_area">
+			<div class="pageText" id="pageText">共  <span class="num">1</span> 页，<span class="num">2</span> 条，
+				当前第 <span class="num">1 - 2 </span>条</div>
+			<div class="pageBtn" id="pagination"></div>
+		</div>
+	</div>
+	
+	<!-- 右边排行与通告 -->
+	<div class="right">
+		<!-- 排行榜 -->
+		<div class="rank">
+			<div class="title">
+				<span>排行榜</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+		
+			
+			<!-- 设备使用率TOP10-->
+			<div class="table_all" id="top10_1">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">设备编号</th>
+								<th width="40%">设备使用率</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 学生平均上网时长TOP10-->
+			<div class="table_all" id="top10_2" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="35%">姓名</th>
+								<th width="45%">平均上网时长</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 学生上网原因TOP10-->
+			<div class="table_all" id="top10_3" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">上网原因</th>
+								<th width="40%">次数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content"  >
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			   </div>
+			</div>
+	
+		<!-- 通知通告 -->
+		<div class="notice">
+			<div class="title">
+				<span>通知通告</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div class="table_all" id="notice">
+				<ul>
+				</ul>				
+			</div>
+		</div>
+	</div>
+	
+	<div class="loading" style="display:none;position:absolute;left:42%;top:40%;"></div>
+</body>
+
+<script src="../../plugins/jquery.min.js"></script>
+<script>
+</script>
+<script src="../../plugins/jquery.min.js"></script>
+<script src="../../plugins/layui/layui.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script src="../../js/datamode/common/load.js"></script>
+<script src="../../js/datamode/common/util.js"></script>
+<script src="../../js/datamode/netBehavior_data.js"></script>
+<script src="../../plugins/JsonExportExcel.min.js"></script>
+<script src="../../plugins/echarts4/echarts.min.js"></script>
+<script src="../../plugins/echarts4/echarts-wordcloud.js"></script>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>校园大数据平台——精准资助</title>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<link rel="stylesheet" type="text/css" href="../css/preciseFunding.css">
+<link rel="stylesheet" href="../plugins/scrollbar/jquery.mCustomScrollbar.css">
+</head>
+<body>
+<div class="level_a">
+	<!-- 贫困生人数分布 -->
+	<div class="level_b" style="width:28%;">
+		<div>
+			<div class="title">
+				<span data-index="0">贫困生人数分布</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart1" class="chart" style="width:95%;height:300px;"></div>
+		</div>
+	</div>	
+	<!-- 线 -->
+	<hr class="vertical">	
+		
+	<!-- 贫困生生源地分布 -->
+	<div class="level_b" style="width:40%;">
+		<div>
+			<div class="title">
+				<span data-index="1">贫困生生源地分布</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart2" class="chart" style="width:95%;height:300px;"></div>
+			
+			<div class="map_list">
+				<ul>
+					<!-- <li><span>内蒙古</span><span>11人</span></li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- 线 -->
+	<hr class="vertical">
+	
+	<!-- 学院平均消费 -->
+	<div class="level_b" style="width:30%;">
+		<div>
+			<div class="title">
+				<span data-index="2">学院平均消费</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart3" class="chart" style="width:110%;height:300px;"></div>
+			<div class="time">
+				<div class="time_select">
+					<ul id="time1">
+						<li class="year selected">按年</li>
+						<li class="month">按月</li>
+					</ul>
+				</div>
+				<!-- <div class="time_show">
+					<ul></ul>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 中间线 -->
+<hr class="horizontal">
+
+<div class="level_a" style="margin-top:10px;">
+	<div class="level_b" style="width:28%;">
+		<div>
+			<div class="title">
+				<span data-index="3">贫困生预测情况</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			
+			<div class="table_all">
+				<div class="table_head">
+					<table>
+						<thead>
+						<tr>
+							<th width="22%">专业</th>
+							<th width="23%">所属学院</th>
+							<th width="22%">贫困人数</th>
+							<th width="10%">特困</th>
+							<th width="10%">困难</th>
+							<th width="13%">一般</th>
+						</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>
+							<!-- <tr>
+								<td width="22%">数学</td><td width="23%">理学院</td><td width="22%">67</td>
+								<td width="10%">18</td><td width="10%">19</td><td width="13%">30</td>
+							</tr>-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<hr class="vertical">
+	
+	<div class="level_b" style="width:40%;">
+		<div>
+			<div class="title">
+				<span data-index="4">异常消费情况</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart4" class="chart" style="width:95%;height:300px;"></div>
+			<div class="time">
+				<div class="time_select">
+					<ul id="time2">
+						<li class="year selected">按年</li>
+						<li class="month">按月</li>
+					</ul>
+				</div>
+				<!-- <div class="time_show">
+					<ul></ul>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	
+	<hr class="vertical">
+	
+	<div class="level_b" style="width:30%;">
+		<div>
+			<div class="title">
+				<span data-index="5">贫困生消费对比</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart5" class="chart" style="width:110%;height:300px;"></div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="../plugins/jquery.min.js"></script>
+<script type="text/javascript" src="../plugins/echarts4/echarts.min.js"></script>
+<script type="text/javascript" src="../js/modules/preciseFunding.js"></script>
+<script type="text/javascript" src="../js/timeline.js"></script>
+<script src="../plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript">
+/* $(window).on("load", function(){
+	var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+    if((userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1) //判断是否IE<11浏览器  
+    		|| (userAgent.indexOf("Edge") > -1) 	//判断是否IE的Edge浏览器  
+    		|| (userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1)){
+    	$(".map_list").mCustomScrollbar({
+    		theme: 'my-theme1'
+    	});
+    }
+    $(".table_content").mCustomScrollbar({
+		theme: 'my-theme2'
+	});
+}); */
+</script>
+
+</body>
+</html>

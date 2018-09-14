@@ -1,0 +1,163 @@
+/* 陈仁群修改-2018420 */
+body>div:first-child{
+	height:100%;
+}
+/*网页顶部*/
+#top{
+	height:18%;
+	width:100%;
+	background: url(../image/login/logo.png) no-repeat;
+	background-size:100%;
+	background-position-y: 100%;
+}
+#header{
+   	height: 100%;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 7.8%;
+}
+/*平台中文名*/
+#header>h1{
+	font-family: 'hanyi';
+    background: -webkit-linear-gradient(#e1f5fc, #83d9f9); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#e1f5fc, #83d9f9); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#e1f5fc, #83d9f9); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#e1f5fc, #83d9f9); /* 标准的语法 */
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    padding-bottom: 0%;
+    padding-top: 0%;
+    font-size:2.8vw;
+}
+/*平台英文名*/
+#header>span{
+	font-family: 'STSong';
+    color: #69d2f9;
+    font-size:1.13vw;
+}
+/*网页中部*/
+#middle{
+	height:75%;
+	width:100%;
+	margin:0 auto;
+    text-align: center;
+    color:white;
+    text-shadow: 0px 0px 5px #5dc7fb;
+    position: relative;
+    top:-1%;
+}
+#middle>div{    
+   float: left;
+    background: url(../image/login/select_bg.png) no-repeat;
+    width: 500px;
+    height: 300px;
+    margin-top: 10%;
+}
+.username{   
+	background: url(../image/login/userinput.png) no-repeat;
+    width:400px;
+    height:50px;
+    padding-left: 10px;
+    border:none;
+}
+.password{   
+	background: url(../image/login/userinput.png) no-repeat;
+    width:400px;
+    height:50px;
+    margin-top: 30px;
+    padding-left: 10px;
+    margin-bottom:30px;
+    border:none;
+}
+#btn_login{
+	background: url(../image/login/login_btn.png) no-repeat;
+    width:400px;
+    height:60px;
+    border:none;
+    cursor: pointer;
+}
+#btn_login:hover{
+	background: url(../image/login/btn_logined.png) no-repeat;
+    width:400px;
+    height:60px;
+    border:none;
+}
+.selected:hover{
+	background: url(../image/login/selected_bg.png) round !important;
+}
+/*块级元素*/
+.block{
+	font-size: 30px;
+    cursor: pointer;
+    font-family: 'hanyi';
+    padding-top: 18%;
+    padding-left: 8.5%;
+}
+/*登录表单*/
+#middle form{
+	width: 400px;
+    height: 200px;
+    top: 30%;
+}
+/*定义表单每行高度*/
+#middle p{
+	height: 15%;
+	padding-bottom:3%;
+}
+#middle input{
+	outline:none;
+	color:white;
+	text-shadow: 0px 0px 5px #5dc7fb;
+}
+#middle img{
+	margin-left: -15px;
+}
+/*用户名密码输入框*/
+#middle input[type=text],#middle input[type=password]{
+    height: 42px;
+    width: 340px;
+    font-size: 24px;
+    border: none;
+    outline: none;
+    vertical-align: bottom;
+    margin-top: 5px;
+    margin-left: 10px;
+    background-color: transparent !important;
+    font-family:微软雅黑;
+}
+/*记住密码*/
+.remember{
+	text-align: right;
+    width: 200px;
+    margin-left: 200px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+.remember b,.msg{
+	font-size: 12px; 
+    vertical-align: top; 
+}
+/*提示消息*/
+.msg{
+	float: left;
+    padding-left: 25%;
+    color: orangered;
+    text-shadow: none;
+}
+/*网页底部*/
+#bottom{
+	/* top: 95%; */
+    position: absolute;
+    /* left: 44%; */
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+}
+#bottom>div{
+	text-align: center;
+    padding-top: 1%;
+    font-size: 16px;
+    color: #82ABC1;
+    font-family: 'Microsoft YaHei';
+}

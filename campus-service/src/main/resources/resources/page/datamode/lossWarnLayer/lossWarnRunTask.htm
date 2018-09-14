@@ -1,0 +1,181 @@
+<!-- 本页面为失联预警-数据模式-失联学生预警的失联状态流程弹窗页面 -->
+<style>
+    ::-webkit-scrollbar {
+        width: 8px;
+        background-color: #083c75;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #165fac;
+    }
+
+    .top_stuinfo {
+        font-size: 16px;
+        color: white;
+        line-height: 50px;
+        border-bottom: 1px solid rgba(45, 149, 212, 0.5);
+        margin-top: -20px;
+    }
+
+    .top_stuinfo span {
+        margin: 0 15px;
+        text-shadow: 0 0 5px white;
+    }
+
+    .runtask ul {
+        padding-left: 20px;
+    }
+
+    .runtask ul li {
+        list-style: none;
+        position: relative;
+        width: 150px;
+        height: 80px;
+        float: left;
+        margin-top: 10px;
+    }
+
+    .runtask ul li .main {
+        font-size: 16px;
+        color: #d8f6ff;
+        background: url(../../../image/process_label.png) no-repeat, linear-gradient(to right, transparent 0px, rgba(14, 81, 152, 0.6) 20px);
+        display: inline-block;
+        line-height: 21px;
+        padding: 0px 10px 0px 25px;
+        margin-top: 20px;
+        text-shadow: 0 0 1px;
+    }
+
+    .runtask ul li #time {
+        position: absolute;
+        top: 0;
+        font-size: 12px;
+        color: #1b86be;
+    }
+
+    .runtask ul li #name, .runtask ul li #phone {
+        position: absolute;
+        font-size: 12px;
+        color: #5ec5fb;
+    }
+
+    .runtask ul li #name {
+        top: 45px;
+    }
+
+    .runtask ul li #phone {
+        top: 60px;
+    }
+
+    .runtask ul li #phone span {
+        text-decoration: underline;
+    }
+
+    .runtask ul li img {
+        margin-left: 10px;
+        vertical-align: -4px;
+    }
+
+    .runtask ul li.active .main {
+        color: #f2890c;
+        background: url(../../../image/process_label2.png) no-repeat, linear-gradient(to right, transparent 0px, rgba(172, 98, 10, 0.5) 20px);
+    }
+
+    .runtask ul li.active #time {
+        color: #ac620a;
+    }
+
+    .runtask ul li.active #name, .runtask ul li.active #phone {
+        color: #f2890c;
+    }
+</style>
+
+<div id="content">
+    <div class="top_stuinfo">
+        <span id="stuname" style="margin-left:30px;"></span>
+        <span id="collegeName"></span>
+        <span id="phoneNumber"></span>
+    </div>
+    <div class="runtask">
+        <ul>
+            <li>
+                <div class="main">系统预警</div>
+                <div id="time"></div>
+                <div id="name"></div>
+                <div id="phone"><span></span></div>
+                <img src="../../../image/right_arrow.png">
+            </li>
+            <li style="width:160px;">
+                <div class="main">辅导员排查</div>
+                <div id="time"></div>
+                <div id="name"></div>
+                <div id="phone"><span></span></div>
+                <img src="../../../image/right_arrow.png">
+            </li>
+            <li>
+                <div class="main">可能失联</div>
+                <div id="time"></div>
+                <div id="name"></div>
+                <div id="phone"><span></span></div>
+                <img src="../../../image/right_arrow.png">
+            </li>
+            <li style="width:220px;">
+                <div class="main">联系学生家属及朋友</div>
+                <div id="time"></div>
+                <div id="name"></div>
+                <div id="phone"><span></span></div>
+                <img src="../../../image/right_arrow.png">
+            </li>
+            <li style="width:160px;">
+                <div class="main">保卫处调查</div>
+                <div id="time"></div>
+                <div id="name"></div>
+                <div id="phone"><span></span></div>
+                <img src="../../../image/right_arrow.png">
+            </li>
+            <li>
+                <div class="main">确认失联</div>
+                <div id="time"></div>
+                <div id="name"></div>
+                <div id="phone"><span></span></div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript" src="../../../plugins/jquery.min.js"></script>
+<script type="text/javascript">
+    function open_success(o) {
+        $.ajax({
+            type: 'post',
+            url: '/lossContactWarn/getLossWarnRunTask',
+            data: {
+                ucId: o.id
+            },
+            dataType: 'json',
+            success: function (result) {
+                var data = result.object;
+                if (data) {
+                    $("#stuname").text(o.name);
+                    $("#collegeName").text(o.collegeName);
+                    $("#phoneNumber").text("电话：" + o.phoneNumber);
+
+                    var $ul = $(".runtask ul"), $li = $ul.children("li");
+                    $.each(data, function (i, item) {
+                        var $li_this = $li.eq(i);
+                        $li_this.find("#time").text(item.createTime);
+                        if (i != 0) {
+                            $li_this.find("#name").text(item.resPhone);
+                            $li_this.find("#phone").html("T：<span>" + item.responsible + "</span>");
+                        }
+                        if (i == (data.length - 1)) {
+                            $li_this.addClass("active");
+                        }
+                    });
+                } else {
+                    $("#content").html("数据不存在");
+                }
+            }
+        });
+    }
+</script>

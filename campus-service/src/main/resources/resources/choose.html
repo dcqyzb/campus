@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/choose.css">
+<title>平台选择界面</title>
+</head>
+<body style="margin:0;overflow:hidden;">
+	<div style="background: url(image/login/choose_bg.png) no-repeat;background-size: cover;width: 100%;height: 100vh;overflow:auto;background-position-x: 50%;background-position-y: 50%;">
+		<div id="top">
+			<div id="header">
+				<h1>智慧校园行业应用大数据分析平台</h1>
+				<span>WISDOM&nbsp;CAMPUS&nbsp;INDUSTRY&nbsp;APPLICATION&nbsp;OF&nbsp;BIG&nbsp;DATA&nbsp;ANALYSIS&nbsp;PLATFORM</span>
+			</div>
+		</div>
+		<div id="middle">
+			<div id="left">
+				<div class="block" onclick="changeBg(this)">
+					<img alt="可视化管理平台" src="image/login/chart.png">
+					<p>可视化管理平台</p>
+				</div>
+			</div>
+			<div id="right">
+				<div class="block" onclick="changeBg(this)">
+					<img alt="数据管理平台" src="image/login/data.png">
+					<p>数据管理平台</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom">
+			<div>--&nbsp;版权所有&#169;江西航天鄱湖云科技有限公司&nbsp;--</div>
+		</div>
+	</div>
+
+	<script src="plugins/jquery.min.js"></script>
+	<script type="text/javascript" src="js/choose.js"></script>
+	<script src="plugins/layui/layui.js"></script>
+		<script type="text/javascript">
+	$(function(){
+		$("#left").css({'position':'absolute','left':($(window).width()-1220)/2});
+		$(window).resize(function(){
+			$("#left").css({'position':'absolute','left':($(window).width()-1220)/2});
+		})
+		$("#right").css({'position':'absolute','left':($(window).width()+80)/2});
+		$(window).resize(function(){
+			$("#right").css({'position':'absolute','left':($(window).width()+80)/2});
+		})
+	})
+	</script>
+</body>
+</html>

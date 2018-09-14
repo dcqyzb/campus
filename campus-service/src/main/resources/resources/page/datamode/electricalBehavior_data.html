@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数据模式-用电行为</title>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="../../plugins/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css" href="../../css/common_datamode.css">
+<link rel="stylesheet" type="text/css" href="../../css/loading.css">
+<link rel="stylesheet" type="text/css" href="../../css/mylayui.css">
+<link rel="stylesheet" type="text/css" href="../../css/lay/electricDetail.css">
+</head>
+<body>
+	<!-- 左边导航 -->
+	<div class="left_nav">
+		<ul class="nav_ul">
+			<li class="selected">
+				<img src="../../image/datamode/nav_selected.png">
+				<a>学院用电统计</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>窃电行为分析</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>违章电器情况</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>未关电器情况</a>
+			</li>
+		</ul>
+	</div>
+
+	<!-- 右边表格 -->
+	<div class="center_table">
+		<img width="100%" height="95%" src="../../image/datamode/tableborder.png">
+		
+		<!-- 学院用电统计表 -->
+		<div id="table1">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>日期：</span>
+					<input type="text" class="input_month start" placeholder="yyyy-MM" style="width:80px;">
+					至
+					<input type="text" class="input_month end" placeholder="yyyy-MM" style="width:80px;">
+				</div>
+				<div class="search_btn" onclick="pagi_collegeElec()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 单个按钮 -->
+				<div class="operate export_btn" onclick="export_collegeElec()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="15%">学院</th>
+								<th width="10%">日期</th>
+								<th width="10%">用电量(度)</th>
+								<th width="10%">用电人数</th>
+								<th width="10%">人均用电(度)</th>
+								<th width="10%">男女比例</th>
+								<th width="10%">节能宿舍数</th>
+								<th width="10%">窃电宿舍数</th>
+								<th width="10%">违章宿舍数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 窃电行为分析表 -->
+		<div id="table2" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>楼栋：</span>
+					<input type="text" style="width:60px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:73px;right:26px;">
+						<li class="selected">全部</li>
+						<li>1栋</li>
+						<li>2栋</li>
+						<li>3栋</li>
+						<li>4栋</li>
+						<li>5栋</li>
+						<li>6栋</li>
+						<li>7栋</li>
+						<li>8栋</li>
+						<li>9栋</li>
+						<li>10栋</li>
+						<li>11栋</li>
+						<li>12栋</li>
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>宿舍号：</span>
+					<input type="text" placeholder="请输入宿舍号" style="width: 90px;">
+				</div>
+				<div class="search_condition">
+					<span>时间：</span>
+					<input type="text" class="input_month start" placeholder="yyyy-MM" style="width: 80px;">
+					至
+					<input type="text" class="input_month end" placeholder="yyyy-MM" style="width: 80px;">
+					
+				</div>
+				<div class="search_btn" onclick="pagi_dormElec('','steal')">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_dormElec('steal')">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="15%">宿舍号</th>
+								<th width="10%">所属楼栋</th>
+								<th width="10%">时间</th>
+								<th width="15%">月用电量（度）</th>
+								<th width="10%">窃电嫌疑</th>
+								<th width="10%">学院</th>
+								<th width="10%">寝室类型</th>
+								<th width="5%">人数</th>				
+								<th width="15%">历史窃电次数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 违章电器情况表 -->
+		<div id="table3" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>楼栋：</span>
+					<input type="text" style="width:60px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:73px;right:26px;">
+						<li class="selected">全部</li>
+						<li>1栋</li>
+						<li>2栋</li>
+						<li>3栋</li>
+						<li>4栋</li>
+						<li>5栋</li>
+						<li>6栋</li>
+						<li>7栋</li>
+						<li>8栋</li>
+						<li>9栋</li>
+						<li>10栋</li>
+						<li>11栋</li>
+						<li>12栋</li>
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>宿舍号：</span>
+					<input type="text" placeholder="请输入宿舍号" style="width: 90px;">
+				</div>
+				<div class="search_condition">
+					<span>时间：</span>
+					<input type="text" class="input_month start" placeholder="yyyy-MM" style="width: 80px;">
+					至
+					<input type="text" class="input_month end" placeholder="yyyy-MM" style="width: 80px;">
+					
+				</div>
+				<div class="search_btn" onclick="pagi_dormElec('','highPower')">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_dormElec('highPower')">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="15%">宿舍号</th>
+								<th width="10%">所属楼栋</th>
+								<th width="10%">时间</th>
+								<th width="15%">月用电量（度）</th>
+								<th width="10%">违章嫌疑</th>
+								<th width="10%">学院</th>
+								<th width="10%">寝室类型</th>
+								<th width="5%">人数</th>				
+								<th width="15%">历史违章次数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 未关电器情况表 -->
+		<div id="table4" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>楼栋：</span>
+					<input type="text" style="width:60px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:73px;right:26px;">
+						<li class="selected">全部</li>
+						<li>1栋</li>
+						<li>2栋</li>
+						<li>3栋</li>
+						<li>4栋</li>
+						<li>5栋</li>
+						<li>6栋</li>
+						<li>7栋</li>
+						<li>8栋</li>
+						<li>9栋</li>
+						<li>10栋</li>
+						<li>11栋</li>
+						<li>12栋</li>
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>宿舍号：</span>
+					<input type="text" placeholder="请输入宿舍号" style="width: 90px;">
+				</div>
+				<div class="search_condition">
+					<span>时间：</span>
+					<input type="text" class="input_month start" placeholder="yyyy-MM" style="width: 80px;">
+					至
+					<input type="text" class="input_month end" placeholder="yyyy-MM" style="width: 80px;">
+					
+				</div>
+				<div class="search_btn" onclick="pagi_dormElec('','unclose')">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_dormElec('unclose')">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="15%">宿舍号</th>
+								<th width="10%">所属楼栋</th>
+								<th width="15%">时间</th>
+								<th width="15%">月用电量（度）</th>
+								<th width="10%">所属学院</th>
+								<th width="10%">寝室类型</th>
+								<th width="10%">寝室人数</th>
+								<th width="15%">未关电器次数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+				
+		<div class="foot_area">
+			<div class="pageText" id="pageText">共  <span class="num">1</span> 页，<span class="num">2</span> 条，
+				当前第 <span class="num">1 - 2 </span>条</div>
+			<div class="pageBtn" id="pagination"></div>
+		</div>
+	</div>
+
+	<!-- 右边排行与通告 -->
+	<div class="right">
+		<!-- 排行榜 -->
+		<div class="rank">
+			<div class="title">
+				<span>排行榜</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			
+			<!-- 学院用电统计TOP10-->
+			<div class="table_all" id="top10_1">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="15%">序号</th>
+								<th width="40%">学院</th>
+								<th width="45%">人均用电(度)</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 窃电行为分析TOP10-->
+			<div class="table_all" id="top10_2" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">宿舍号</th>
+								<th width="40%">窃电嫌疑度</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 违章电器情况TOP10-->
+			<div class="table_all" id="top10_3" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">宿舍号</th>
+								<th width="40%">违章嫌疑度</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 未关电器TOP10-->
+			<div class="table_all" id="top10_4" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">宿舍号</th>
+								<th width="40%">未关次数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 通知通告 -->
+		<div class="notice">
+			<div class="title">
+				<span>通知通告</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div class="table_all" id="notice">
+				<ul>
+				</ul>				
+			</div>
+		</div>
+	</div>
+	
+	<div class="loading" style="display:none;position:absolute;left:42%;top:40%;"></div>
+</body>
+
+<script src="../../plugins/jquery.min.js"></script>
+<script>
+(function(){
+	var $parentIframe = $(window.parent.document.getElementById("contentFrame"));
+	$("body").css("height", $parentIframe.height());
+	
+	var screenWidth = window.screen.width;
+	if( screenWidth < 1900){
+		$(".table_area").css("height", $(".center_table>img").height() - 150);
+		$(".table_all").map(function(){
+			$(this).css("height", $(this).parent().height() - 50);
+		});
+		$(".table_content").map(function(){
+			$(this).css("height", $(this).parent().height() - 50);
+		});
+		
+		$(".nav_ul a").css("font-size", (screenWidth/277 + 10) + "px");
+		$(".search_condition span").css("font-size", "16px");
+		$(".search_condition input").css("font-size", "14px");
+		$(".table_head thead").css("font-size", "16px");
+		$(".table_content tbody").css("font-size", "14px");
+		$(".right .title").css("font-size", "16px");
+	}
+})();
+</script>
+<script src="../../plugins/layui/layui.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script src="../../js/datamode/electricalBehavior_data.js"></script>
+<script src="../../plugins/JsonExportExcel.min.js"></script>
+<script src="../../plugins/echarts4/echarts.min.js"></script>
+<script src="../../plugins/echarts4/echarts-wordcloud.js"></script>
+</html>

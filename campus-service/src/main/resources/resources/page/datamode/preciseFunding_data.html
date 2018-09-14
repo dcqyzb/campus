@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数据模式-精准资助</title>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="../../plugins/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css" href="../../css/common_datamode.css">
+<link rel="stylesheet" type="text/css" href="../../css/loading.css">
+<link rel="stylesheet" type="text/css" href="../../css/mylayui.css">
+</head>
+<body>
+	<!-- 左边导航 -->
+	<div class="left_nav">
+		<ul class="nav_ul">
+			<li class="selected">
+				<img src="../../image/datamode/nav_selected.png">
+				<a>贫困生人数分布</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>贫困生生源地分布</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>学院平均消费</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>贫困生预测情况</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>异常消费情况</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>贫困生消费对比</a>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- 右边表格 -->
+	<div class="center_table">
+		<img width="100%" height="95%" src="../../image/datamode/tableborder.png">
+		
+		<!-- 贫困生人数分布表 -->
+		<div id="table1">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>专业：</span>
+					<input type="text" style="width:130px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul major" style="width:143px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>贫困等级：</span>
+					<input type="text" style="width:40px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:65px;right:14px;">
+						<li class="selected">全部</li>
+						<li>一般</li>
+						<li>困难</li>
+						<li>特困</li>
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>评定年份：</span>
+					<input type="text" class="input_year start" placeholder="yyyy" style="width:60px;">
+					至
+					<input type="text" class="input_year end" placeholder="yyyy" style="width:60px;">
+				</div>
+				<div class="search_btn" onclick="pagi_poorNumber()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导入按钮 -->
+				<!-- <div class="operate import_btn" onclick="import_poorNumber()">
+					<img src="../../image/import.png">
+					<span>导入</span>
+				</div> -->
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_poorNumber()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="15%">学号</th>
+								<th width="10%">姓名</th>
+								<th width="7%">性别</th>
+								<th width="15%">学院</th>
+								<th width="23%">专业</th>
+								<th width="10%">贫困等级</th>
+								<th width="10%">评定年份</th>
+								<th width="10%">入学年份</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 贫困生生源地分布表 -->
+		<div id="table2" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>生源地：</span>
+					<input type="text" style="width:55px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul birthArea" style="width:75px;right:19px;">						
+						<li class="selected">全部</li>
+						<li>北京</li><li>天津</li><li>上海</li>
+						<li>重庆</li><li>河北</li><li>山西</li>
+						<li>辽宁</li><li>吉林</li><li>黑龙江</li>
+						<li>江苏</li><li>浙江</li><li>安徽</li>
+						<li>福建</li><li>江西</li><li>山东</li>
+						<li>河南</li><li>湖北</li><li>湖南</li>
+						<li>广东</li><li>海南</li><li>四川</li>
+						<li>贵州</li><li>云南</li><li>陕西</li>
+						<li>甘肃</li><li>青海</li><li>西藏</li>
+						<li>广西</li><li>内蒙古</li><li>宁夏</li>
+						<li>新疆</li><li>香港</li><li>澳门</li>
+						<li>台湾</li>
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>贫困等级：</span>
+					<input type="text" style="width:40px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:65px;right:14px;">
+						<li class="selected">全部</li>
+						<li>一般</li>
+						<li>困难</li>
+						<li>特困</li>
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>评定年份：</span>
+					<input type="text" class="input_year start" placeholder="yyyy" style="width:60px;">
+					至
+					<input type="text" class="input_year end" placeholder="yyyy" style="width:60px;">
+				</div>
+				<div class="search_btn" onclick="pagi_poorArea()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 单个按钮 -->
+				<div class="operate export_btn" onclick="export_poorArea()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="15%">学号</th>
+								<th width="10%">姓名</th>
+								<th width="5%">性别</th>
+								<th width="20%">户口所在地</th>
+								<th width="10%">户口性质</th>
+								<th width="10%">学院</th>
+								<th width="10%">贫困等级</th>
+								<th width="10%">评定年份</th>
+								<th width="10%">入学年份</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 学院平均消费表 -->
+		<div id="table3" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>年份：</span>
+					<input type="text" class="input_year start" placeholder="yyyy" style="width:60px;">
+					至
+					<input type="text" class="input_year end" placeholder="yyyy" style="width:60px;">
+				</div>
+				<div class="search_btn" onclick="pagi_average()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 单个按钮 -->
+				<div class="operate export_btn" onclick="export_average()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="5%">序号</th>
+								<th width="16%">学院</th>
+								<th width="10%">年份</th>
+								<th width="10%">人数（个）</th>
+								<th width="11%">水电（元）</th>
+								<th width="11%">餐饮（元）</th>
+								<th width="11%">娱乐（元）</th>
+								<th width="11%">其他（元）</th>
+								<th width="15%">总人均消费（元）</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 下阶段贫困生预测情况表 -->
+		<div id="table4" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>专业：</span>
+					<input type="text" style="width:130px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul major" style="width:143px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>贫困等级：</span>
+					<input type="text" style="width:40px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:65px;right:14px;">
+						<li class="selected">全部</li>
+						<li>一般</li>
+						<li>困难</li>
+						<li>特困</li>
+					</ul>
+				</div>
+				<div class="search_btn" onclick="pagi_forecast()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 对比按钮 -->
+				<div class="operate compare_btn" onclick="compare_poorForecast()">
+					<img src="../../image/compare.png">
+					<span>对比</span>
+				</div>
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_poorForecast()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="2%"></th>
+								<!-- <th width="5%" title="多选框" class='check' onclick="check(this)"><img src="../../image/check.png"></th> -->
+								<th width="10%" title="学号">学号</th>
+								<th width="6%" title="姓名">姓名</th>
+								<th width="10%" title="学院">学院</th>
+								<th width="10%" title="专业">专业</th>
+								<th width="6%" title="贫困等级">贫困等级</th>
+								<th width="6%" title="户口">户口</th>
+								<th width="6%" title="健康状况">健康状况</th>
+								<th width="5%" title="是否孤残">是否孤残</th>
+								<th width="5%" title="是否单亲">是否单亲</th>
+								<th width="5%" title="烈士子女">烈士子女</th>
+								<th width="4%" title="家庭人口">家庭人口</th>
+								<th width="7%" title="家庭年收入（元）">家庭年收入（元）</th>
+								<th width="6%" title="有危重病人">有危重病人</th>
+								<th width="6%" title="助学贷款（元）">助学贷款（元）</th>
+								<th width="6%" title="是否补考">是否补考</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 异常消费情况表 -->
+		<div id="table5" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>姓名：</span>
+					<input type="text" placeholder="请输入" style="width:60px;">
+				</div>
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<!-- <div class="search_condition">
+					<span>消费类型：</span>
+					<input type="text" style="width:40px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:65px;right:14px;">
+						<li class="selected">全部</li>
+						<li>水电</li>
+						<li>餐饮</li>
+						<li>娱乐</li>
+						<li>其它</li>
+					</ul>
+				</div> -->
+				<div class="search_condition">
+					<span>日期：</span>
+					<input type="text" class="input_month start" placeholder="yyyy-MM" style="width:80px;">
+					至
+					<input type="text" class="input_month end" placeholder="yyyy-MM" style="width:80px;">
+				</div>
+				<div class="search_btn" onclick="pagi_abnormal()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 单个按钮 -->
+				<div class="operate export_btn" onclick="export_abnormal()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="12%">学号</th>
+								<th width="8%">姓名</th>
+								<th width="8%">学院</th>
+								<th width="10%">专业班级</th>
+								<th width="8%">餐饮（元）</th>
+								<th width="8%">娱乐（元）</th>
+								<th width="8%">水电（元）</th>
+								<th width="8%">其他（元）</th>
+								<th width="10%">总消费（元）</th>
+								<th width="10%">消费时间</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 贫困生消费对比表 -->
+		<div id="table6" style="display:none;">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>专业：</span>
+					<input type="text" style="width:130px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul major" style="width:143px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>贫困等级：</span>
+					<input type="text" style="width:40px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:65px;right:14px;">
+						<li>全部</li>
+						<li>一般</li>
+						<li>困难</li>
+						<li>特困</li>
+					</ul>
+				</div>
+				<div class="search_btn" onclick="pagi_comparision()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 正增长样式-->
+				<div class="operate posi_btn" onclick="increase_comparision(this)">
+					<img src="../../image/posi_grow.png">
+					<span>正增长</span>
+				</div>
+				<!-- 负增长样式-->
+				<div class="operate nega_btn" onclick="decrease_comparision(this)">
+					<img src="../../image/nega_grow.png">
+					<span>负增长</span>
+				</div>
+				<!-- 单个按钮 -->
+				<div class="operate export_btn" onclick="export_comparision()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="15%">学号</th>
+								<th width="10%">姓名</th>
+								<th width="10%">性别</th>
+								<th width="15%">学院</th>
+								<th width="20%">专业</th>
+								<th width="15%">贫困等级</th>
+								<th width="15%">月均消费涨幅</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="foot_area">
+			<div class="pageText" id="pageText">共  <span class="num"></span> 页，<span class="num"></span> 条，
+				当前第 <span class="num"></span>条</div>
+			<div class="pageBtn" id="pagination"></div>
+		</div>
+	</div>
+	
+	<!-- 右边排行与通告 -->
+	<div class="right">
+		<!-- 排行榜 -->
+		<div class="rank">
+			<div class="title">
+				<span>排行榜</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			
+			<!-- 贫困生人数分布TOP10-->
+			<div class="table_all" id="top10_1">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">学院</th>
+								<th width="40%">贫困人数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 贫困生生源地分布TOP10-->
+			<div class="table_all" id="top10_2" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">地区</th>
+								<th width="40%">贫困人数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 学院平均消费TOP10-->
+			<div class="table_all" id="top10_3" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">学院</th>
+								<th width="40%">平均消费</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 贫困生预测TOP10-->
+			<div class="table_all" id="top10_4" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">学院</th>
+								<th width="40%">预测人数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 异常消费TOP10-->
+			<div class="table_all" id="top10_5" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">学院</th>
+								<th width="40%">异常人数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 消费对比TOP10-->
+			<div class="table_all" id="top10_6" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="40%">专业</th>
+								<th width="30%">姓名</th>
+								<th width="30%">涨幅<i class="layui-icon" title="正增长" onclick="change_comparision();" style="cursor:pointer;">&#xe619;</i></th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 通知通告 -->
+		<div class="notice">
+			<div class="title">
+				<span>通知通告</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div class="table_all" id="notice">
+				<ul>
+				</ul>				
+			</div>
+		</div>
+	</div>
+	
+	<div class="loading" style="display:none;position:absolute;left:42%;top:40%;"></div>
+</body>
+
+<script src="../../plugins/jquery.min.js"></script>
+<script src="../../plugins/layui/layui.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<!-- load.js需在datetimepicker引入之后引入，用到时间插件 -->
+<script src="../../js/datamode/common/load.js"></script>
+<script src="../../js/datamode/common/util.js"></script>
+<script src="../../js/datamode/preciseFunding_data.js"></script>
+<script src="../../plugins/JsonExportExcel.min.js"></script>
+<script src="../../plugins/echarts4/echarts.min.js"></script>
+<script src="../../plugins/echarts4/echarts-wordcloud.js"></script>
+</html>

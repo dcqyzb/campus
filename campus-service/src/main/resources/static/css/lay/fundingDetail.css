@@ -1,0 +1,279 @@
+/**
+ * 贫困生预测，个人资助项目详情，时间轴样式
+ */
+/* body, html { font-size: 100%; 	padding: 0; margin: 0;} */
+
+/* Reset */
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+/* body{
+	background: #bdd9f5;
+	color: #D5D6E2;
+	font-weight: 500;
+	font-size: 1.05em;
+	font-family: "Microsoft YaHei","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif;
+} */
+
+.demo {
+	width:95%;
+	color: #D5D6E2;
+	font-weight: 500;
+	font-size: 1.05em;
+	font-family: "Microsoft YaHei","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif;
+	margin: 10px auto;
+}
+
+.main-timeline {
+	overflow: hidden;
+	position: relative;
+}
+/*时间轴柱子  */
+.main-timeline:before {
+	content: "";
+	width: 6px;
+	height: 100%;
+	background: #909090;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.main-timeline .timeline {
+	width: 50%;
+	height: 131px;
+	padding-left: 38px;
+	float: right;
+	position: relative;
+}
+/* 时间轴上的圆圈 */
+.main-timeline .timeline:before {
+	content: "";
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	background: #909090;
+	border: 7px solid #fff;
+	position: absolute;
+	top: 20%;
+	left: -12px;
+	transform: translateY(-50%);
+}
+/*每项内容前面的小三角形  */
+.main-timeline .timeline:after {
+	content: "";
+	display: block;
+	border-right: 36px solid #c0280a;
+	border-top: 18px solid transparent;
+	border-bottom: 17px solid transparent;
+	position: absolute;
+	top: 18%;
+	left: 18px;
+	transform: translateY(-50%);
+}
+
+.main-timeline .timeline-content {
+	display: block;
+	/* padding: 5px; */
+	border-radius: 100px;
+	background: #c0280a;
+	position: relative;
+}
+
+.main-timeline .timeline-content:before, .main-timeline .timeline-content:after
+	{
+	content: "";
+	display: block;
+	width: 100%;
+	clear: both;
+}
+
+.main-timeline .timeline-content:hover {
+	text-decoration: none;
+}
+
+.main-timeline .inner-content {
+	width: 74%;
+	float: right;
+	padding: 2px 4px 0px 4px;
+	background: #fff;
+	border-radius: 0 100px 100px 0;
+	color: #c0280a;
+}
+
+.main-timeline .year {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 600;
+	color: #fff;
+	position: absolute;
+	top: 50%;
+	left: 7%;
+	transform: translateY(-50%);
+}
+
+.main-timeline .timeline-title {
+	font-size: 15px;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin: 0 0 5px 0;
+}
+
+.main-timeline .description {
+	font-size: 14px;
+	margin: 0 0 5px 0;
+}
+/* 第2n项内容 */
+.main-timeline .timeline:nth-child(2n) {
+	padding: 0px 38px 0 0;
+}
+
+.main-timeline .timeline:nth-child(2n):before, .main-timeline .timeline:nth-child(2n) .year
+	{
+	left: auto;
+	right: -12px;
+}
+
+.main-timeline .timeline:nth-child(2n) .year {
+	right: 7%;
+}
+
+.main-timeline .timeline:nth-child(2n):after {
+	border-right: none;
+	border-left: 36px solid #c46513;
+	left: auto;
+	right: 18px;
+}
+
+.main-timeline .timeline:nth-child(2n) .inner-content {
+	float: none;
+	border-radius: 100px 0 0 100px;
+	text-align: right;
+}
+
+.main-timeline .timeline:nth-child(2) {
+	margin-top: 46px;
+}
+
+.main-timeline .timeline:nth-child(odd) {
+	margin: -130px 0 0 0;
+}
+
+.main-timeline .timeline:nth-child(even) {
+	margin-bottom: 0px;
+}
+
+.main-timeline .timeline:first-child, .main-timeline .timeline:last-child:nth-child(even)
+	{
+	margin: 0;
+}
+
+.main-timeline .timeline:nth-child(2n) .timeline-content {
+	background: #c46513;
+	text-decoration: none;
+}
+
+.main-timeline .timeline:nth-child(2n), .main-timeline .timeline:nth-child(2n) .inner-content
+	{
+	color: #c46513;
+}
+
+.main-timeline .timeline:nth-child(2n):after {
+	border-left-color: #c46513;
+}
+/* 第3n项内容 */
+.main-timeline .timeline:nth-child(3n) .timeline-content {
+	background: #0d6fab;
+	margin-top: 51px;
+}
+
+.main-timeline .timeline:nth-child(3n), .main-timeline .timeline:nth-child(3n) .inner-content
+	{
+	color: #0d6fab;
+}
+
+.main-timeline .timeline:nth-child(3n):after {
+	border-right-color: #0d6fab;
+	top: 58%;
+}
+
+.main-timeline .timeline:nth-child(3n):before{
+	top: 60%;
+}
+
+.main-timeline .timeline:nth-child(4n) .timeline-content {
+	background: #9361aa;
+}
+
+.main-timeline .timeline:nth-child(4n), .main-timeline .timeline:nth-child(4n) .inner-content
+	{
+	color: #9361aa;
+}
+
+.main-timeline .timeline:nth-child(4n):after {
+	border-left-color: #9361aa;
+}
+
+.main-timeline .timeline:nth-child(5n) .timeline-content {
+	background: #a7be26;
+	margin-top: 51px;
+}
+
+.main-timeline .timeline:nth-child(5n), .main-timeline .timeline:nth-child(5n) .inner-content
+	{
+	color: #a7be26;
+	/* margin-top: -2px; */
+}
+
+.main-timeline .timeline:nth-child(5n):after {
+	border-right-color: #a7be26;
+	top: 58%;
+}
+
+.main-timeline .timeline:nth-child(5n):before{
+	top: 61%;
+}
+
+.main-timeline .timeline:nth-child(6n) .timeline-content {
+	background: #9361aa;
+}
+
+.main-timeline .timeline:nth-child(6n), .main-timeline .timeline:nth-child(6n) .inner-content
+	{
+	color: #9361aa;
+}
+
+.main-timeline .timeline:nth-child(6n):after {
+	border-left-color: #9361aa;
+}
+
+.main-timeline .timeline:nth-child(10n) .timeline-content {
+	background: #c46513;
+	text-decoration: none;
+}
+
+.main-timeline .timeline:nth-child(10n), .main-timeline .timeline:nth-child(10n) .inner-content
+	{
+	color: #c46513;
+}
+
+.main-timeline .timeline:nth-child(10n):after {
+	border-left-color: #c46513;
+}

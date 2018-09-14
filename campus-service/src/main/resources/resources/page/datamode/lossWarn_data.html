@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数据模式 - 失联预警</title>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="../../plugins/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css" href="../../css/common_datamode.css">
+<link rel="stylesheet" type="text/css" href="../../css/loading.css">
+<link rel="stylesheet" type="text/css" href="../../css/mylayui.css">
+</head>
+<body>
+	<!-- 左边导航 -->
+	<div class="left_nav">
+		<ul class="nav_ul">
+			<li class="selected">
+				<img src="../../image/datamode/nav_selected.png">
+				<a>失联学生预警</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>失联地点统计</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>失联原因分析</a>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- 右边表格 -->
+	<div class="center_table">
+		<img width="100%" height="95%" src="../../image/datamode/tableborder.png">
+		
+		<!-- 失联学生预警 -->
+		<div id="table1">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>姓名：</span>
+					<input type="text" placeholder="请输入" style="width:60px;">
+				</div>
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>预警时间：</span>
+					<input type="text" class="input_date start" placeholder="yyyy-MM-dd" style="width:110px;">
+					至
+					<input type="text" class="input_date end" placeholder="yyyy-MM-dd" style="width:110px;">
+				</div>
+				<div class="search_condition">
+					<span>状态：</span>
+					<input type="text" style="width:95px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:120px;right:14px;">
+						<li class="selected">全部</li>
+						<li title="系统预警">系统预警</li>
+						<li title="辅导员排查">辅导员排查</li>
+						<li title="可能失联">可能失联</li>
+						<li title="联系学生家属及朋友">联系学生家属及朋友</li>
+						<li title="保卫处调查">保卫处调查</li>
+						<li title="确认失联">确认失联</li>
+					</ul>
+				</div>
+				<div class="search_btn" onclick="pagi_lossWarnStus()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_Warn()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="13%">学号</th>
+								<th width="8%">姓名</th>
+								<th width="15%">院系</th>
+								<th width="18%">预警时间</th>
+								<th width="10%">状态</th>
+								<th width="12%">电话</th>
+								<th width="8%">辅导员</th>
+								<th width="8%">宿舍人员</th>
+								<th width="8%">亲密好友</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 失联地点统计 -->
+		<div id="table2">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>地点：</span>
+					<input type="text" placeholder="请输入" style="width:80px;">
+				</div>
+				<div class="search_condition">
+					<span>年份：</span>
+					<input type="text" class="input_year start" placeholder="yyyy" style="width:60px;">
+					至
+					<input type="text" class="input_year end" placeholder="yyyy" style="width:60px;">
+				</div>
+				<div class="search_btn" onclick="pagi_lossAreaStatistic()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_Area()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="7%">序号</th>
+								<th width="20%">失联地点</th>
+								<th width="15%">年份</th>
+								<th width="10%">活跃度</th>
+								<th width="10%">失联总人数</th>
+								<th width="10%">区域负责人</th>
+								<th width="20%">地点位置信息</th>
+								<th width="8%">监控个数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 失联原因分析 -->
+		<div id="table3">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>姓名：</span>
+					<input type="text" placeholder="请输入" style="width:60px;">
+				</div>
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:90px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:103px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>失联原因：</span>
+					<input type="text" placeholder="请输入" style="width:60px;">
+				</div>
+				<div class="search_condition">
+					<span>入学年份：</span>
+					<input type="text" class="input_year start" placeholder="yyyy" style="width:60px;">
+					至
+					<input type="text" class="input_year end" placeholder="yyyy" style="width:60px;">
+				</div>
+				<div class="search_btn" onclick="pagi_lossReason()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_Reason()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="12%">学号</th>
+								<th width="7%">姓名</th>
+								<th width="15%">院系</th>
+								<!-- <th width="8%">生源地</th> -->
+								<th width="8%">入学年份</th>
+								<th width="15%">失联时间</th>
+								<th width="15%">找到时间</th>
+								<th width="9%">发现地点</th>
+								<th width="9%">失联原因</th>
+								<th width="10%">处理时长</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 分页信息 -->
+		<div class="foot_area">
+			<div class="pageText" id="pageText">共  <span class="num"></span> 页，<span class="num"></span> 条，
+				当前第 <span class="num"></span>条</div>
+			<div class="pageBtn" id="pagination"></div>
+		</div>
+	</div>
+	
+	<!-- 右边排行与通告 -->
+	<div class="right">
+		<!-- 排行榜 -->
+		<div class="rank">
+			<div class="title">
+				<span>排行榜</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			
+			<!-- 学院失联人数TOP10-->
+			<div class="table_all" id="top10_1">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">学院</th>
+								<th width="40%">失联人数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 失联地点人数TOP10-->
+			<div class="table_all" id="top10_2" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">地点</th>
+								<th width="40%">失联人数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 失联原因TOP10-->
+			<div class="table_all" id="top10_3" style="display:none;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">失联原因</th>
+								<th width="40%">人数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 通知通告 -->
+		<div class="notice">
+			<div class="title">
+				<span>通知通告</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div class="table_all" id="notice">
+				<ul>
+				</ul>				
+			</div>
+		</div>
+	</div>
+	
+	<div class="loading" style="display:none;position:absolute;left:42%;top:40%;"></div>
+	
+	
+<script src="../../plugins/jquery.min.js"></script>
+<script src="../../plugins/layui/layui.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<!-- load.js需在datetimepicker引入之后引入，用到时间插件 -->
+<script src="../../js/datamode/common/load.js"></script>
+<script src="../../js/datamode/common/util.js"></script>
+<script src="../../js/datamode/lossWarn_data.js"></script>
+<script src="../../plugins/JsonExportExcel.min.js"></script>
+<script src="../../plugins/echarts4/echarts.min.js"></script>
+<script src="../../plugins/echarts4/echarts-wordcloud.js"></script>
+</body>
+</html>

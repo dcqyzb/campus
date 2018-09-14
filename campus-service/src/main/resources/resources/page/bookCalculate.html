@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>校园大数据平台——图书测算</title>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+</head>
+<body>
+<div class="level_a">
+	<div class="level_b" style="width:28%;">
+		<div>
+			<div class="title">
+				<span>图书借阅分析</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart1" class="chart"></div>
+			<div class="time">
+				<div class="time_select">
+					<ul id="time1" style="width:55px;">
+						<li class="" style="height:21px;line-height:21px;">按读者</li>
+						<li class="selected" style="height:21px;line-height:21px;">按图书</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 线 -->
+	<hr class="vertical">
+	<div class="level_b" style="width:43%;">
+		<div>
+			<div class="title">
+				<span>图书需求变化趋势</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart2" class="chart"></div>
+		</div>
+	</div>
+	<!-- 线 -->
+	<hr class="vertical">
+	<div class="level_b" style="width:28%;">
+		<div>
+			<div class="title">
+				<span>懒惰读者行为分析</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart3" class="chart"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 中间线 -->
+<hr class="horizontal">
+
+<div class="level_a">
+	<div class="level_b" style="width:33%;">
+		<div>
+			<div class="title">
+				<span>借阅关系图</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart4" class="chart"></div>
+		</div>
+	</div>
+	<!-- 线 -->
+	<hr class="vertical">
+	<div class="level_b" style="width:31%;">
+		<div>
+			<div class="title">
+				<span>图书借阅排行榜</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div class="table_all" style="width:85%;margin-left:7.5%;">
+				<div class="table_head">
+					<table>
+						<thead>
+						<tr>
+							<th width="10%" title="序号">序号</th>
+							<th width="40%" title="书名">书名</th>
+							<th width="15%" title="借阅次数">借阅次数</th>
+							<th width="15%" title="借阅率">借阅率</th>
+							<th width="10%" title="总数">总数</th>
+							<th width="10%" title="库存">库存</th>
+						</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 线 -->
+	<hr class="vertical">
+	<div class="level_b" style="width:35%;">
+		<div>
+			<div class="title">
+				<span>冷门图书借阅分析</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart5" class="chart"></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="../plugins/jquery.min.js"></script>
+<script type="text/javascript" src="../plugins/echarts4/echarts.min.js"></script>
+<script type="text/javascript" src="../js/modules/bookCalculate.js"></script>
+<script type="text/javascript" src="../js/timeline.js"></script>
+</body>
+</html>

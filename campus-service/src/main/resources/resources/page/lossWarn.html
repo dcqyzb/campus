@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>校园大数据平台——失联预警</title>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<link rel="stylesheet" type="text/css" href="../css/lossWarn.css">
+</head>
+<body>
+<div class="level_b" style="width:65%">
+	<div id="myChart"></div>
+</div>
+
+<!-- 线 -->
+<hr class="vertical">
+
+<div class="level_b" style="width:34%">
+	<div style="width:90%;margin-left: 10%;margin-top:10px;">
+		<div class="level_c" style="height:35%">
+			<div class="title">
+				<span data-index="0">失联学生预警</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div class="table_all" style="width:100%;margin-top:15px;">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="13%">姓名</th>
+								<th width="19%">院系</th>
+								<th width="24%">预警时间</th>
+								<th width="24%">处理时间</th>
+								<th width="8%">状态</th>
+								<th width="12%">操作</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content" >
+					<table>
+						<tbody>
+							<!-- <tr><td width="13%">李雪梅</td><td width="23%">理学院数学153班</td><td width="22%">2018-02-03 15:33</td><td width="22%">2018-02-05 10:30</td><td width="10%" class="shilian">失联中</td><td width="10%">操作</td></tr>
+							<tr><td width="13%">李雪梅</td><td width="23%">理学院数学153班</td><td width="22%">2018-02-03 15:33</td><td width="22%">2018-02-05 10:30</td><td width="10%" class="zhaodao">已找到</td><td width="10%">操作</td></tr>
+							<tr><td width="13%">李雪梅</td><td width="23%">理学院数学153班</td><td width="22%">2018-02-03 15:33</td><td width="22%">2018-02-05 10:30</td><td width="10%" class="tiaocha">正在调查</td><td width="10%">操作</td></tr>
+							<tr><td width="13%">李雪梅</td><td width="23%">理学院数学153班</td><td width="22%">2018-02-03 15:33</td><td width="22%">2018-02-05 10:30</td><td width="10%" class="zhaodao">已找到</td><td width="10%">操作</td></tr> -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="level_c" style="height:35%">
+			<div class="title">
+				<span data-index="1">失联学生统计</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart2" class="chart" style="height:95%;"></div>
+		</div>
+		
+		<div class="level_c" style="height:23%;margin:0;">
+			<div class="title">
+				<span data-index="2">失联关键词云</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div id="chart3" class="chart" style="height:90%;"></div>
+		</div>
+	</div>
+</div>
+
+<div id="fixTip" class="tip"></div>
+
+<script type="text/javascript" src="../plugins/jquery.min.js"></script>
+<script type="text/javascript" src="../plugins/echarts4/echarts.min.js"></script>
+<script type="text/javascript" src="../js/modules/lossWarn.js"></script>
+<script type="text/javascript" src="../js/timeline.js"></script>
+<script src="../plugins/echarts4/echarts-wordcloud.js"></script>
+</body>
+</html>

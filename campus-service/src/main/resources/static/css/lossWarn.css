@@ -1,0 +1,35 @@
+/*
+ * 失联预警样式
+ */
+tbody {
+	font-size: 13px;
+}
+tbody tr:hover,  tbody tr.selected{
+	background-color: #026b96!important;
+	cursor: default;
+}
+/* ‘失联中’文本样式 */
+td.shilian {
+	color: #ce4028;
+}
+/* ‘已找到’文本样式 */
+td.zhaodao {
+	color: #68bc67;
+}
+/* ‘正在调查’文本样式 */
+td.tiaocha {
+	color: #ccb545;
+}
+
+#fixTip {
+	width: 210px;
+	position: fixed;
+	right: 36%;
+	top: 15px;
+	padding: 10px;
+	background-color: rgba(108, 101, 59, 0.8)/* #6c633a */;
+	color: white;
+	font-size: 14px;
+	display: none;
+	border-radius: 0;
+}

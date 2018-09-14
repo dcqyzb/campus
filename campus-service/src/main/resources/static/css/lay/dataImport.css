@@ -1,0 +1,48 @@
+/**
+ * 数据导入弹窗模板内容样式
+ */
+
+.modal-content {
+	width: 100%;
+	color: white;
+}
+.modal-content-line {
+	margin: 10px 5%;
+	height: 30px;
+	line-height: 30px;
+}
+.modal-content-line label {
+	width: 30%;
+	display: inline-block;
+	text-align: right;
+	text-shadow: 0px 0px 5px white;
+	font-size: 16px;
+}
+
+.modal-content-line a {
+	color: #ebb030;
+	text-decoration: underline;
+}
+.modal-content-line a:hover {color: #f3cd10;}
+
+.modal-content-line input.file {
+	border: 1px solid #2d95d4;
+	padding-left: 10px;
+	padding-right: 20px;
+	height: 23px;
+	color: white;
+	background: none;
+	background-color: #073567;
+}
+.modal-content-line img.delete {
+	vertical-align: -2px;
+	margin-left: -21px;
+	cursor: pointer;
+}
+
+.modal-content-line div.upload {
+	display: inline-block;
+	color: #ebb030;
+	text-decoration: underline;
+}
+.modal-content-line div.upload img {vertical-align: -3px;margin-right: -5px;margin-left: 5px;}

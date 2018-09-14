@@ -1,0 +1,101 @@
+/**
+ * 用电行为，窃电、违章、未关电器详情，时间轴样式
+ */
+@charset "utf-8";
+/* CSS Document */
+
+.clearfix:before, .clearfix:after {
+	display: table;
+	content: "";
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+.history {
+	margin: 8px auto 32px 13px;
+}
+
+.history_ch {
+	font-size: 18px;
+	color: #d80017;
+	margin-bottom: 30px;
+}
+
+.history_main {
+	position: relative;
+	padding-left: 20px;
+	overflow: hidden;
+}
+
+.history_line {
+	width: 1px;
+	height: 100%;
+	background-color: #314a31;
+	position: absolute;
+	left: 29px;
+	z-index: -1;
+}
+
+.history_main  ul li {
+	height: auto;
+	padding-left: 25px;
+	font-size: 14px;
+	color: #a5fefb;
+	line-height: 30px;
+	/* margin-bottom: 30px; */
+	background: url(../../image/datamode/timelinepoint.png) left 5px no-repeat;
+}
+
+.history_main  ul li:last-child {
+	margin-bottom: 0px;
+}
+
+.history_main  ul li div.period{
+	height: 35px;
+	margin-left: 20px;
+	color: #61c6f6;
+}
+
+/* 弹窗中宿舍学生信息表 */
+.layui-layer-content div.dormInfo{
+	margin:-23px 0 10px 50px;
+	font-size: 14px;
+	color: #ffffff;
+}
+
+.studentTable{
+	border:none;
+	cursor: context-menu;
+}
+
+.studentTable td{
+	border-right: 0.5px solid rgba(45, 149, 212, 0.5);
+}
+
+.studentTable td div.left{
+	float:left;
+	margin: 16px;
+	color: #e0a82f;
+}
+
+.studentTable td div.right{
+	padding-left: 68px;
+	text-align: left;
+}
+
+/* 弹窗中读者借阅历史表 */
+.layui-layer-content div.reader{
+	margin:0 0 10px 50px;
+	font-size: 14px;
+	color: #ffffff;
+}
+.history_main  ul li div.period1{
+	margin-left: 20px;
+	color: #61c6f6;
+}

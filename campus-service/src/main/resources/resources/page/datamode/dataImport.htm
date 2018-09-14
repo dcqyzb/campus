@@ -1,0 +1,67 @@
+<!-- 数据导入弹窗模板 -->
+<link rel="stylesheet" type="text/css" href="../../css/lay/dataImport.css">
+<div class="modal-content" >
+	<div class="modal-content-line">
+		<label>数据模板：</label>
+		<a id="downloadTmp_btn" href="javascript:void(0)" class="template">贫困生信息数据模板excel</a>
+	</div>
+	<div class="modal-content-line">
+		<label>上传附件：</label>
+		<input type="text" class="file" readonly>
+		<img id="deleteFile_btn" width="12" class="delete" src="../../image/file_delete.png">
+		<div class="upload">
+			<img width="16" src="../../image/file_upload.png">
+			<a id="upload_btn" href="javascript:void(0)">上传</a>
+			<form id="uploadForm" enctype="multipart/form-data" method ="post">
+				<input type="file" style="display:none" onchange="chooseFile(this)">
+			</form>
+		</div>
+	</div>
+</div>
+
+<script src="../../plugins/jquery.min.js"></script>
+<script type="text/javascript">
+//点击【上传】
+$("#upload_btn").click(function(){
+	$(this).siblings("form").find("input").click();
+});
+//选择文件
+function chooseFile(obj){
+	var $this = $(obj), //文件选择输入框
+		fileName = $this.val(),	//文件名，包括路径
+		suffix = fileName.split(".").pop(),	//文件后缀
+		$input = $this.parent().parent().siblings("input.file");
+	if(suffix != "xls"){
+		parent.layer.msg("不支持的文件格式，只支持.xls格式", {icon: 0, shade: 0.5, time: 1500});
+		$this.val("");
+		return;
+	}
+	$input.val(fileName);
+	$input.attr("title", fileName);
+}
+//下载导入模板
+$("#downloadTmp_btn").click(function(){
+	//先判断文件是否存在
+	$.ajax({
+		type: 'post',
+		url: '/campusbd/api/preciseFunding/downloadTips',
+		data: {
+			fileName: '贫困生信息表导入模板.xls'
+		},
+		dataType: 'json',
+		success: function(result){
+			if(result.resultCode){
+				parent.window.open("/campusbd/api/preciseFunding/downloadExcel?" +
+						"fileName="+encodeURI(encodeURI('贫困生信息表导入模板.xls'))+"&t="+new Date().getTime(), "_self");
+			}else{
+				parent.layer.msg("文件不存在", {icon: 2, shade: 0.5})
+			}
+		}
+	});
+});
+//删除已选文件
+$("#deleteFile_btn").click(function(){
+	$(this).siblings("input").val("");
+	$("#uploadForm input").val("");
+});
+</script>

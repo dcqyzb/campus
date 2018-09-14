@@ -1,0 +1,67 @@
+<!-- 陈仁群修改：页面自适应  2018.4.18-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/choose.css">
+<title>大数据平台登录页面</title>
+<style>
+        input:-webkit-autofill {
+            -webkit-box-shadow:0 0 0 100px #031e3d inset; 
+            -webkit-text-fill-color: #fff;
+        }
+        input:-webkit-autofill:focus {
+            -webkit-box-shadow:0 0 0 100px #031e3d inset;
+            -webkit-text-fill-color: #fff;
+        }
+</style>
+</head>
+<body style="margin:0;overflow:hidden;">
+	<div style="background: url(image/login/bluebg.png) no-repeat;background-size: cover;width: 100%;height: 100vh;overflow:auto;">
+		 <div id="top">
+			<div id="header">
+				<h1>智慧校园行业应用大数据分析平台</h1>
+				<span>WISDOM&nbsp;CAMPUS&nbsp;INDUSTRY&nbsp;APPLICATION&nbsp;OF&nbsp;BIG&nbsp;DATA&nbsp;ANALYSIS&nbsp;PLATFORM</span>
+			</div>
+		</div>
+		<div id="middle" style="background: url(image/login/earth.png) no-repeat;background-position-x: 50%;background-position-y: 50%;">
+			 <form id="form">
+				<div class="username">
+					<!-- <input type="password" style="width: 0; height: 0; float: left; visibility: hidden" /> -->
+					<img src="image/login/username.png"/>
+					<input type="text" id="username" name="login_username" size="20" placeholder="用户名"/>
+				</div>
+				<div class="password">
+					<!-- <input type="password" style="width: 0; height: 0; float: left; visibility: hidden" /> -->
+					<img src="image/login/password.png"/>
+					<input type="password" id="password" name="login_pwd" size="20" placeholder="密码"/>
+				</div>
+				<div class="remember">
+				<span class="msg"></span>
+					<input type="checkbox" id="rememberMe" onchange="remember(this)"><b>记住密码</b>
+				</div>
+				<p>
+					<input type="button" id="btn_login"/>
+				</p>
+			</form> 
+		</div>
+		<div id="bottom">
+			<div>--&nbsp;版权所有&#169;江西航天鄱湖云科技有限公司&nbsp;--</div>
+		</div> 
+	</div>
+
+	<script src="plugins/jquery.min.js"></script>
+	<script src="plugins/jquery.cookie.js"></script>
+ 	<script type="text/javascript" src="js/login.js"></script>
+	<script src="plugins/layui/layui.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("#middle form").css({'position':'absolute','left':($(window).width()-320)/2});
+		$(window).resize(function(){
+			$("#middle form").css({'position':'absolute','left':($(window).width()-320)/2});
+		})
+	})
+	</script>
+</body>
+</html>

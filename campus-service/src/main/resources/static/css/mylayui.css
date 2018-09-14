@@ -1,0 +1,170 @@
+/**
+ * 自定义layui下组件的样式，包括laypage、laydate、layer
+ */
+
+/* laypage分页图标样式*/
+.layui-laypage {
+	margin: 0!important;
+}
+.layui-laypage a, .layui-laypage span {
+	color: #949391!important;
+	background: none!important;
+	border: none!important;
+	padding: 0 8px!important;
+	margin: 0 10px 3px 0!important;
+	height: 22px!important;
+	line-height: 22px!important;
+}
+.layui-laypage>a:first-child, .layui-laypage>a:last-child {
+	color: #a1fdfa!important;
+    background-color: #236cb1!important;
+}
+.layui-laypage>a.layui-disabled {
+	background-color: #7e807d!important;
+    color: #aaa!important;
+}
+.layui-laypage .layui-laypage-curr .layui-laypage-em {
+	background: none!important;
+	border: 1px solid #629aa9!important;
+	padding: 0!important;
+}
+
+/* laydate时间弹窗样式 */
+.layui-laydate {
+	border: 1px solid #073567!important;
+	color: white!important;
+}
+.layui-laydate-header {
+	border: none!important;
+	background-color: #073567!important;
+}
+.layui-laydate-content {
+	border: none!important;
+	border-top: 1px solid #2d95d4!important;
+}
+.layui-laydate-list {
+	background-color: #073567!important;
+	color: white!important;
+}
+.layui-laydate .layui-this {
+	background-color: #073567!important;
+}
+.layui-laydate-footer {
+	background-color: #073567!important;
+    border-top: 1px solid #2d95d4!important;
+}
+.laydate-footer-btns span {
+	background-color: #073567!important;
+    border: 1px solid #2d95d4!important;
+}
+.laydate-footer-btns span:hover {
+	background-color: white!important;
+	color: black!important;
+}
+
+/* layer自定义弹窗样式,样式名为'my-default' */
+body .my-default {
+	background: none;
+}
+body .my-default>img {
+	width: 110%;
+	height: 115%;
+	position: absolute;
+	margin-left: -5%;
+	margin-top: -3%;
+	z-index: -1;
+}
+body .my-default .layui-layer-title {
+	border: none;
+	background: none;
+	color: white;
+	padding: none;
+	padding-left: 5%;
+}
+body .my-default .layui-layer-setwin {
+	right: unset;
+	top: unset;
+	bottom: -17%;
+    left: 48%;
+}
+body .my-default .layui-layer-ico {
+	width: 23px;
+	height: 23px;
+	background: none;
+}
+body .my-default .layui-layer-btn {
+	text-align: center;
+}
+body .my-default .layui-layer-btn .layui-layer-btn0 {
+	border: none;
+	background: url('../image/confirm.png') no-repeat center;
+	text-shadow: 0px 0px 5px white;
+	padding: 0 25px;
+	margin-left: 20px;
+    padding-left: 40px;
+}
+.layui-layer-content iframe {
+	position: relative;
+}
+/* 自定义弹窗标题样式 */
+.mylay-title {
+	color: white;
+	position: relative;
+	height: 42px;
+}
+/* 标题文字 */
+.mylay-title span {
+	padding-left: 5px;
+	border-bottom: 2px solid #5dc7fb;
+	text-shadow: 0px 0px 5px white;
+}
+/* 标题左边竖线 */
+.mylay-title-left-hr {
+	border: none;
+	width: 1px;
+	height: 30%;
+	position: absolute;
+	left: 0;
+	top: 35%;
+	background-color: #feb113;
+}
+/* 标题右边小图样式 */
+.mylay-title-right-hr {
+	width: 2px;
+	height: 10px;
+	border: none;
+	display: inline-block;
+	background-color: #5dc5fc;
+	margin-left: 2px;
+	margin-bottom: -7px;
+	-ms-transform: rotate(35deg); /* IE 9 */
+    -mozs-transform: rotate(35deg); /* Firefox */
+    -webkit-transform: rotate(35deg); /* Safari and Chrome */
+    -o-transform: rotate(35deg); /* Opera */
+    transform: rotate(35deg);
+}
+.mylay-title-point {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background-color: #5dc5fc;
+	display: inline-block;
+	margin-left: -1px;
+}
+/* 弹窗内表格 */
+.layui-layer-content table {
+	border-right: 0.5px solid rgba(45, 149, 212, 0.5);
+	border-bottom: 0.5px solid rgba(45, 149, 212, 0.5);
+}
+.layui-layer-content td.head {background-color: rgba(5, 66, 111, 0.3);}
+.layui-layer-content th, .layui-layer-content td {	
+	border-left: 0.5px solid rgba(45, 149, 212, 0.5);
+}
+.layui-layer-content tr:nth-child(even) { background-color: #03294e; }
+
+/*上传成功-背景*/
+body .upload-sucess {
+    background: url(../image/datamode/layer.png) round !important;
+}
+   
+

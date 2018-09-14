@@ -1,0 +1,6 @@
+# AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.mit.campus.core.base.controller.GlobalController,\
+com.mit.campus.core.config.DefaultFastjsonConfig,\
+com.mit.campus.core.config.DefaultProperties,\
+com.mit.campus.core.config.DefaultWebConfig

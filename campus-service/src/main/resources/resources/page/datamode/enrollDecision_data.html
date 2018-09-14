@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数据模式 - 招生决策</title>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="../../plugins/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css" href="../../css/common_datamode.css">
+<link rel="stylesheet" type="text/css" href="../../css/loading.css">
+<link rel="stylesheet" type="text/css" href="../../css/mylayui.css">
+<style type="text/css">
+.search_area>div {margin-right:20px;}
+</style>
+</head>
+<body>
+	<!-- 左边导航 -->
+	<div class="left_nav">
+		<ul class="nav_ul">
+			<li class="selected">
+				<img src="../../image/datamode/nav_selected.png">
+				<a>访问来源统计</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>就业情况统计</a>
+			</li>
+			<li>
+				<img src="../../image/datamode/nav.png">
+				<a>访问时间统计</a>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- 右边表格 -->
+	<div class="center_table">
+		<img width="100%" height="95%" src="../../image/datamode/tableborder.png">
+		
+		<!-- 访问来源统计 -->
+		<div id="table1">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<!-- <div class="search_condition">
+					<span>省：</span>
+					<input type="text" style="width:55px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul provice" style="width:75px;right:19px;">
+						<li class="selected">全部</li>
+						<li>北京</li><li>天津</li><li>上海</li>
+						<li>重庆</li><li>河北</li><li>山西</li>
+						<li>辽宁</li><li>吉林</li><li>黑龙江</li>
+						<li>江苏</li><li>浙江</li><li>安徽</li>
+						<li>福建</li><li>江西</li><li>山东</li>
+						<li>河南</li><li>湖北</li><li>湖南</li>
+						<li>广东</li><li>海南</li><li>四川</li>
+						<li>贵州</li><li>云南</li><li>陕西</li>
+						<li>甘肃</li><li>青海</li><li>西藏</li>
+						<li>广西</li><li>内蒙古</li><li>宁夏</li>
+						<li>新疆</li><li>香港</li><li>澳门</li>
+						<li>台湾</li>
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>市：</span>
+					<input type="text" style="width:60px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul city" style="width:73px;right:26px;">
+						
+					</ul>
+				</div> -->
+				<div class="search_condition">
+					<span>省：</span>
+					<input type="text" style="width:60px;" placeholder="请输入">
+				</div>
+				<div class="search_condition">
+					<span>市：</span>
+					<input type="text" style="width:60px;" placeholder="请输入">
+				</div>
+				<div class="search_condition">
+					<span>时间：</span>
+					<input type="text" class="input_month start" placeholder="yyyy-MM" style="width:80px;">
+					至
+					<input type="text" class="input_month end" placeholder="yyyy-MM" style="width:80px;">
+				</div>
+				<div class="search_btn" onclick="pagi_interviewSource()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_interviewSource()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="10%">省</th>
+								<th width="10%">市</th>
+								<th width="10%">年月</th>
+								<th width="9%">总访问量</th>
+								<th width="9%">360搜索</th>
+								<th width="9%">百度搜索</th>
+								<th width="9%">搜狗搜索</th>
+								<th width="9%">学校官网</th>
+								<th width="9%">学校招生网</th>
+								<th width="9%">省教育网</th>
+								<th width="7%">其它</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 就业情况统计 -->
+		<div id="table2">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>学院：</span>
+					<input type="text" style="width:70px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul college" style="width:83px;right:26px;">
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>就业地：</span>
+					<input type="text" style="width:40px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:60px;right:19px;">
+						<li class="selected">全部</li>
+						<li>北京</li><li>天津</li><li>上海</li>
+						<li>重庆</li><li>河北</li><li>山西</li>
+						<li>辽宁</li><li>吉林</li><li>黑龙江</li>
+						<li>江苏</li><li>浙江</li><li>安徽</li>
+						<li>福建</li><li>江西</li><li>山东</li>
+						<li>河南</li><li>湖北</li><li>湖南</li>
+						<li>广东</li><li>海南</li><li>四川</li>
+						<li>贵州</li><li>云南</li><li>陕西</li>
+						<li>甘肃</li><li>青海</li><li>西藏</li>
+						<li>广西</li><li>内蒙古</li><li>宁夏</li>
+						<li>新疆</li><li>香港</li><li>澳门</li>
+						<li>台湾</li>
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>地区：</span>
+					<input type="text" style="width:40px;" class="select-input" value="全部" readonly>
+					<ul class="select-ul" style="width:53px;right:26px;">
+						<li>华东</li><li>华南</li><li>华中</li><li>华北</li><li>西北</li><li>西南</li><li>东北</li>
+					</ul>
+				</div>
+				<div class="search_condition">
+					<span>年份：</span>
+					<input type="text" class="input_year start" placeholder="yyyy" style="width:45px;">
+					至
+					<input type="text" class="input_year end" placeholder="yyyy" style="width:45px;">
+				</div>
+				<div class="search_btn" onclick="pagi_employmentStatus()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_employmentStatus()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">学院</th>
+								<th width="15%">毕业时间</th>
+								<th width="10%">总人数</th>
+								<th width="10%">男</th>
+								<th width="10%">女</th>
+								<th width="20%">就业地</th>
+								<th width="15%">地区</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 访问时间统计 -->
+		<div id="table3">
+			<!-- 搜索区域 -->
+			<div class="search_area">
+				<div class="search_condition">
+					<span>年份：</span>
+					<input type="text" class="input_year start" placeholder="yyyy" style="width:60px;">
+					至
+					<input type="text" class="input_year end" placeholder="yyyy" style="width:60px;">
+				</div>
+				<div class="search_btn" onclick="pagi_interviewTime()">
+					<img src="../../image/search_btn_icon.png">
+					<span>查询</span>
+				</div>
+				<div class="clear_btn" onclick="clearCondition(this)">
+					<img src="../../image/clear_btn_icon.png">
+					<span>清空</span>
+				</div>
+			</div>
+			<!-- 操作按钮区域 -->
+			<div class="operate_area">
+				<!-- 导出按钮 -->
+				<div class="operate export_btn" onclick="export_interviewTime()">
+					<img src="../../image/export.png">
+					<span>导出</span>
+				</div>
+			</div>
+			<!-- 表格区域 -->
+			<div class="table_area">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="10%">年份</th>
+								<th width="10%">访问总量</th>
+								<th width="7%">一月</th>
+								<th width="7%">二月</th>
+								<th width="7%">三月</th>
+								<th width="7%">四月</th>
+								<th width="7%">五月</th>
+								<th width="7%">六月</th>
+								<th width="7%">七月</th>
+								<th width="7%">八月</th>
+								<th width="7%">九月</th>
+								<th width="7%">十月</th>
+								<th width="7%">十一月</th>
+								<th width="7%">十二月</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+				
+		<div class="foot_area">
+			<div class="pageText" id="pageText">共  <span class="num"></span> 页，<span class="num"></span> 条，
+				当前第 <span class="num"></span>条</div>
+			<div class="pageBtn" id="pagination"></div>
+		</div>
+	</div>
+	
+	<!-- 右边排行与通告 -->
+	<div class="right">
+		<!-- 排行榜 -->
+		<div class="rank">
+			<div class="title">
+				<span>排行榜</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			
+			<!-- 访问城市TOP10-->
+			<div class="table_all" id="top10_1">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">城市</th>
+								<th width="40%">访问量</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 就业地人数TOP10-->
+			<div class="table_all" id="top10_2">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">就业地</th>
+								<th width="40%">人数</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- 访问量TOP10-->
+			<div class="table_all" id="top10_3">
+				<div class="table_head">
+					<table>
+						<thead>
+							<tr>
+								<th width="20%">序号</th>
+								<th width="40%">年份</th>
+								<th width="40%">访问量</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="table_content">
+					<table>
+						<tbody>												
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 通知通告 -->
+		<div class="notice">
+			<div class="title">
+				<span>通知通告</span>
+				<hr class="title_left_hr">
+				<hr class="title_right_hr">
+				<div class="title_point"></div>
+			</div>
+			<div class="table_all" id="notice">
+				<ul>
+				</ul>				
+			</div>
+		</div>
+	</div>
+	
+	<div class="loading" style="display:none;position:absolute;left:42%;top:40%;"></div>
+	
+	
+<script src="../../plugins/jquery.min.js"></script>
+<script src="../../plugins/layui/layui.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../plugins/bootstrap/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<!-- load.js需在datetimepicker引入之后引入，用到时间插件 -->
+<script src="../../js/datamode/common/load.js"></script>
+<script src="../../js/datamode/common/util.js"></script>
+<script src="../../js/datamode/enrollDecision_data.js"></script>
+<script src="../../plugins/JsonExportExcel.min.js"></script>
+</body>
+</html>
